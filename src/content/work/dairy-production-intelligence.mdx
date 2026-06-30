@@ -1,0 +1,37 @@
+---
+title: "Dairy production intelligence suite"
+description: "Three integrated systems — production tracker, planning agent, and debtors dashboard — connected to a live SAP Business One ERP."
+sector: "Dairy Manufacturing"
+tech: ["React", "Express", "PostgreSQL", "SAP B1", "MindStudio", "Python", "T-SQL"]
+order: 3
+---
+
+## The problem
+
+A dairy manufacturer in Zimbabwe tracked production, planning, and receivables entirely by hand. Production losses were invisible — milk went in, product came out, and nobody could trace where the gap opened. The production planner maintained a stack of linked Excel workbooks (weekly demand grids, per-product order-trigger engines, 13 warehouse stock-count sheets reconciled by hand against SAP). The debtors team exported from SAP, pasted into a six-tab Excel workbook, and typed aging buckets manually.
+
+## What I built
+
+Three integrated systems, all connected to the same live SAP Business One ERP.
+
+**Production operations tracker** — a full-stack app tracing every litre from truck delivery, through intermediate bulk products, to finished consumer packs. Three-layer production hierarchy enforced in the data model. Per-stage loss attribution across four process stages, accurate to the litre. Formula system with conversion ratios and blend recipes across 93 products in 14 categories, reverse-engineered from the client's Excel. 18-step nightly SAP-to-analytics pipeline mirroring the live ERP into a BI-ready PostgreSQL model, with accounting identity verified against source.
+
+**Production planning agent** — a 33-block AI agent architecture (20 SQL queries + 10 Python calculation functions + React dashboard) that replaces the planner's entire spreadsheet stack. Hallucination-proof by design: SQL retrieves, Python calculates, the model touches no numbers at all. One AI call total (a morning greeting). Everything else is deterministic. Order-driven planning logic including made-to-order zero-stock handling and perishable rules, lifted faithfully from undocumented spreadsheets.
+
+**Debtors intelligence agent** — a real-time dashboard querying SAP directly, computing multi-currency balances (USD + ZiG) and aging on the fly. Reconciled to the penny against the debtors team's source-of-truth spreadsheet before any logic was built on top. Handles undocumented SAP currency quirks: USD stored as blank/NULL, ZiG as a non-ISO code, and legacy currency that must fold into the current standard.
+
+## The hard parts
+
+**The planning logic lived in spreadsheets and in someone's head.** Order triggers, min/max stock, shelf life calculations, per-product planning parameters — all reverse-engineered from actual workbooks and re-implemented as deterministic Python, including non-obvious cases where zero stock is correct (made-to-order perishables) rather than an alarm.
+
+**Multi-currency minefield.** SAP stores currencies inconsistently across tables. One table uses `DocCurr` (two R's), every other uses `DocCur`. Cancelled-record casing differs per table. Getting currency segregation right in every query and transform was the line between trustworthy and useless numbers.
+
+**Live ERP integration against a production database nobody documented.** SAP Business One's table layout is sprawling and poorly documented. I mapped the relevant document and ledger tables, built replace strategies keyed on stable period columns, and verified the balance-sheet identity against source.
+
+## Impact
+
+- 19 production tables, 93 products, 14 categories, loss tracking to the litre
+- 2,125 debtor accounts, six-figure receivables surfaced in a single view
+- 33-block hallucination-proof agent architecture
+- 18-step nightly SAP-to-analytics pipeline with verified accounting identity
+- Replaced the company's spreadsheet stack as the operational source of truth

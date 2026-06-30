@@ -1,0 +1,40 @@
+---
+title: "Hybrid CNN-Transformer for crop disease detection"
+description: "Robustness-engineered deep learning model that closes the lab-to-field accuracy gap for smallholder farmers using budget phones."
+sector: "Agriculture / Computer Vision"
+tech: ["PyTorch", "ResNet18", "Transformer", "Streamlit", "scikit-learn"]
+order: 4
+---
+
+## The problem
+
+Published plant-disease detection models score 95-99% on clean laboratory images. But smallholder farmers in Zimbabwe and sub-Saharan Africa take photos under real field conditions — low light, cheap-phone cameras with 5MP sensors and no optical image stabilisation, motion blur, cluttered backgrounds. Under those conditions, the same models collapse. And these farmers rarely have access to an agronomist.
+
+## What I built
+
+A hybrid CNN-Transformer architecture in PyTorch that classifies ten tomato leaf conditions from a single phone photo, deliberately engineered and measured for robustness to real-world image degradation rather than only reporting clean-lab accuracy.
+
+**The architecture**: ImageNet-pretrained ResNet18 backbone extracts local texture features. Those feature maps are reshaped into patch tokens and fed into a multi-head self-attention Transformer encoder for global reasoning. A fused classification head produces the final prediction. ~14.88 million trainable parameters, sized to run on free-tier CPU inference.
+
+**Two-stage training design**: a baseline model (standard augmentation) and a hardened model retrained with aggressive field-simulating augmentation (brightness +/-40%, contrast variation, Gaussian noise and blur, perspective transforms, resolution simulation), MixUp (alpha 0.2), and label smoothing (epsilon 0.1). Same architecture and hyperparameters — so any accuracy gain is attributable to the training strategy alone, not the model. This is the core scientific contribution.
+
+**Structured field-evaluation protocol**: 94 real farm photos across 3 device tiers (budget, mid-range, flagship) and 2 lighting conditions, with disease labels assigned independently by an agricultural specialist. The evaluation is designed to separate model failure from sensor failure — showing that the low-tier confidence drop is a hardware/image-quality effect, not a model-capacity limit.
+
+**Live deployment**: a Streamlit web app on Streamlit Community Cloud. Upload a photo, receive the predicted class, confidence score, top-5 probabilities, and disease-management guidance. No app install required — works from any phone browser.
+
+## The hard parts
+
+**Closing the lab-to-field gap through training strategy alone.** The baseline model performed well on clean data but failed on degraded field images. Rather than swapping in a larger model, I fixed it through augmentation, MixUp, and label smoothing — producing a cleaner, more defensible scientific result and the explicit point of difference from the GAN-based base paper.
+
+**Designing out circular validation bias.** Field labels came from an independent agricultural specialist (not model-assisted). Device tiers were defined by camera hardware specifications before any results were seen. The evaluation cannot quietly confirm itself.
+
+**Separating model failure from sensor failure.** The field accuracy gradient (64% budget, 81.5% mid-range, 90.5% flagship) required honest interpretation — showing it is a hardware/image-quality effect rather than glossing over it as most write-ups do.
+
+## Impact
+
+- Clean-test accuracy: baseline 95%, hardened 93% (only -2 points)
+- Simulated low-light F1: 0.42 to 0.78 (+36 points) — the headline result
+- Field accuracy by device tier: 64% (budget) / 81.5% (mid-range) / 90.5% (flagship)
+- Won Best Poster at IndabaX Zimbabwe 2026
+- Selected for Deep Learning Indaba 2027
+- Live on Streamlit Community Cloud, deployable on free CPU inference

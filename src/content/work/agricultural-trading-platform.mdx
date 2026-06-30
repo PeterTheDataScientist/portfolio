@@ -1,0 +1,43 @@
+---
+title: "Agricultural trading platform"
+description: "Replaced a 12-year undocumented Access database for a multi-million-dollar agricultural trading operation. Bank-grade security retrofit from zero."
+sector: "Agriculture / Finance"
+tech: ["React", "TypeScript", "Express", "PostgreSQL", "Drizzle ORM", "MindStudio"]
+order: 2
+---
+
+## The problem
+
+A multi-million-dollar agricultural trading operation — covering commodity broking, silo storage, and farmer prefinance — ran its entire business on a 12-year-old Microsoft Access database, stitched together with Excel spreadsheets and manual Pastel accounting entry. User passwords were stored in plaintext. Bank account numbers, VAT numbers, and addresses for 16,000+ sellers sat unencrypted. There was no audit trail, no access control, and no way to trace who changed what or when.
+
+## What I built
+
+A unified AI-first web platform that replaces three fragmented systems with one system of record — designed for bank-grade security over what was previously an unprotected shared file.
+
+**Full PostgreSQL schema** reverse-engineered from 60+ undocumented Access tables, preserving original business keys and quirks verbatim. This included misspelt column names that downstream joins depend on — preserved intentionally, not "corrected", because correctness here means matching the data's actual behaviour.
+
+**Role-based access control** across six roles, enforced on 75+ read routes and 36 write routes, with broker-scope concealment so users cannot even detect records outside their permission boundary.
+
+**Envelope encryption** of seller and buyer PII at rest, with blind indexes for encrypted search. This replaced a system where passwords were stored in a table alongside bank account numbers in the clear.
+
+**An honest-status data layer**: unknown or unpriced values render as an em-dash, never a fabricated zero. Finance never acts on fake figures.
+
+**An import-quarantine pipeline** that isolates dirty source rows instead of silently dropping or "correcting" them.
+
+**866 tests** with tests-first, proved-to-fail discipline on every financial, PII, and auth code path — run against throwaway ephemeral databases so production is never touched.
+
+## The hard parts
+
+**Schema archaeology on a 12-year undocumented system.** The business logic lived inside Access forms and query expressions, not code. Wheat invoicing rules were frozen into column names like `As73betweenAnd75` and `Greater75Lesser78` — a density-grading formula expressed as query fields. I reconstructed that as real, testable code rather than guessing.
+
+**Source data that fights you.** A misspelt key column had to be preserved verbatim because every downstream join depends on it. A 26,000-row interest table nobody could explain was kept by default pending business context — unfamiliar data gets preserved, not deleted.
+
+**Drawing a hard line at the money.** Rather than reverse-engineer accounting logic from guesswork, I gated all finance and dashboard work behind a defined prerequisite — a mirrored accounting database. Nothing money-related gets built on assumptions. Knowing what not to build yet is part of the engineering.
+
+## Impact
+
+- 60+ source tables, 12 years of trading data migrated with full provenance
+- ~24,600 GRV transactions, 16,000+ sellers, 101,000+ contract price lines
+- Three fragmented systems collapsed into one system of record
+- Encryption, RBAC, and audit trail where previously there was none
+- 866-test suite covering every sensitive code path

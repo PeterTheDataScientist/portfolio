@@ -1,0 +1,45 @@
+---
+title: "Enterprise operations command centre"
+description: "Replaced a legacy CRM and built a live operations platform with AI-governed query execution across 80+ branches and 7,000+ product lines."
+sector: "Manufacturing"
+tech: ["React", "TypeScript", "Express", "PostgreSQL", "Drizzle ORM", "MindStudio", "Openbravo"]
+order: 1
+---
+
+## The problem
+
+A national animal feed manufacturer with 80+ branches and 7,000+ product lines was running core operations on a legacy CRM costing roughly $100,000 per year, alongside an ERP with 862 undocumented tables. There was no unified operational view, no queryable intelligence, and no audit trail on business-critical actions.
+
+Management relied on static reports. When a branch manager needed to understand product performance, customer trends, or stock positions, the answer was days away — buried in spreadsheets and manual queries.
+
+## What I built
+
+A full operations command centre that replaced the CRM and went well past it — adding live operational modules and an AI layer where managers ask questions and issue instructions in plain English, with every action written to an immutable audit trail.
+
+**75+ table PostgreSQL schema** as the single source of truth, with UUID keys, timezone-aware timestamps, and full event-sourcing audit on every mutation.
+
+**A two-mode AI assistant**: INFO mode turns a natural-language question into actor-scoped SQL and interprets the result; FUNCTIONS mode turns an instruction into a validated tool call across 44+ registered tools spanning sales and procurement.
+
+**safeSql** — a query-safety layer that lets AI-generated SQL run against the live database safely. It parses and rejects anything that is not a read, rewrites the query to scope rows to the requesting actor's branch, and hard-caps result size. A branch representative physically cannot pull another branch's data through the assistant.
+
+**Operational modules** covering sales (leads, opportunities, quotations with discount-approval workflows, campaigns, case management), procurement (14 tables, 24 AI tools, ~40 endpoints), weighbridge (inbound/outbound tonnage, variance flagging), fleet command, and service ticketing.
+
+**A purpose-built data lake** — 16+ read-optimised tables on a separate PostgreSQL instance, fed by a daily ETL pipeline. This powers analytical dashboards including gross-profit computation derived from a ~1.97 million-row costing model that I reverse-engineered from the undocumented ERP.
+
+**A housekeeping module** for master-data hygiene: CSV import, phone and email normalisation for Zimbabwe's format variations, duplicate detection and merge, and data-completeness scoring.
+
+## The hard parts
+
+**Undocumented ERP schema to gross-profit truth.** The ERP shipped with no usable documentation. The real cost and gross-profit logic had to be reverse-engineered from the live database — tracing it through transaction cost tables and a moving-average costing model across nearly two million rows, then rebuilding that as a reproducible, governed daily computation.
+
+**Making AI safe to point at a production database.** Letting an LLM generate SQL against live operational data is a liability without guardrails. The safeSql layer is a genuine security control: it parses and rejects mutations, rewrites queries to scope to the requesting actor's permissions, and caps result size — so the AI assistant cannot leak data across organisational boundaries.
+
+**Business logic that lived in people's heads.** Core rules were never written down. Discounts must be applied per product, not per quote, and the two must be mutually exclusive. The weighbridge had to separate dispatch from receiving, which the old system silently conflated. These were pulled out in requirement sessions with operators and encoded as enforced workflow rather than convention.
+
+## Impact
+
+- Replaced a ~$100K/year CRM with a purpose-built operations platform
+- 75+ application tables, 44+ AI action tools, 16+ analytical lake tables
+- Daily lake ingestion of ~17–20K sales lines and ~46K stock rows
+- Complete, queryable audit trail the legacy system never had
+- Every AI-generated query governed by actor-scoped, read-only, row-capped safety controls
