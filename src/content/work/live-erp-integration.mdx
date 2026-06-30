@@ -1,0 +1,35 @@
+---
+title: "Live ERP integration"
+description: "Connecting to production ERP environments, reverse-engineering undocumented schemas, and building analytics pipelines on dirty enterprise data."
+sector: "Enterprise integration"
+tech: ["SAP Business One", "Openbravo", "PostgreSQL", "Python", "T-SQL"]
+order: 3
+---
+
+## The pattern
+
+Enterprise resource planning systems hold the real numbers a business runs on, but their databases are sprawling, poorly documented, and never designed to be queried directly. Connecting to a production environment and turning it into trustworthy analytics means working with the data as it actually is, not as the manual says it should be.
+
+I integrate directly with production ERP environments, including SAP Business One and Openbravo, reverse-engineer the parts that matter, and build analytics pipelines that mirror the live system into a clean, BI-ready model.
+
+## What this work involves
+
+**Mapping undocumented schemas.** ERP databases often ship with hundreds of tables, no usable documentation, and no foreign keys to reveal how anything connects. I trace the relevant document and ledger tables by hand, then verify the structure against known accounting identities so the model is provably correct, not merely plausible.
+
+**Handling dirty enterprise data.** Column semantics are frequently undocumented and inconsistent, where the same concept is stored differently from one table to the next, and cancelled or legacy records follow no single convention. Getting these distinctions right in every query is the line between trustworthy and useless numbers.
+
+**Multi-currency correctness.** Real ledgers mix currencies, store them inconsistently, and carry legacy codes that have to fold into the current standard. Currency segregation is handled explicitly in every query and transform, so balances reconcile to the unit.
+
+**Nightly analytics pipelines.** Scheduled pipelines mirror the live ERP into a read-optimised analytics model, using replace strategies keyed on stable period columns, with the accounting identity checked against source on every run.
+
+## How I approach it
+
+**Verify against source, always.** Nothing derived is trusted until it reconciles against the figures the business already considers true.
+
+**Respect the production system.** Integration is read-oriented and carefully scheduled, so the live environment carries no risk from the analytics layer.
+
+**Reverse-engineer, do not assume.** Cost models and financial logic are reconstructed from the live data and confirmed, never inferred from a guess about how the system probably works.
+
+## The result
+
+Businesses gain reliable, queryable analytics on top of ERP systems that were effectively opaque, with multi-currency balances and cost figures that hold up because they were reconciled against the source rather than approximated.

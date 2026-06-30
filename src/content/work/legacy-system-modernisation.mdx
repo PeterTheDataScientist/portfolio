@@ -1,0 +1,35 @@
+---
+title: "Legacy system modernisation"
+description: "Replacing fragile legacy systems with secure, modern web platforms, from undocumented databases to a single trustworthy source of record."
+sector: "Legacy modernisation"
+tech: ["React", "TypeScript", "Express", "PostgreSQL", "Drizzle ORM"]
+order: 4
+---
+
+## The pattern
+
+Many established organisations run their most important operations on systems that were never meant to last this long: multi-year legacy databases, sprawling spreadsheet stacks, and manual accounting entry stitched together over time. The data is real and valuable, but it lives in formats nobody fully understands anymore, often with no access control, no audit trail, and sensitive information sitting in the clear.
+
+I rebuild these as unified, secure web platforms that become a single source of record, without losing the history and business logic locked inside the old system.
+
+## What this work involves
+
+**Schema archaeology**, meaning reverse-engineering dozens of undocumented tables from systems that have grown for over a decade, while preserving original business keys and quirks verbatim. Misspelt column names that downstream joins depend on are kept on purpose, because correctness means matching how the data actually behaves, not how it should have been designed.
+
+**Recovering business logic.** The real rules are rarely in code. They are frozen inside spreadsheet formulas, form expressions, and query fields. I reconstruct grading rules, pricing formulas, and approval workflows as real, testable code rather than guessing at them.
+
+**Security retrofits.** Bringing platforms up to a banking standard from a starting point of plaintext passwords and unprotected records: envelope encryption of personal data at rest, blind indexes for encrypted search, role-based access control, and scope concealment so users cannot even detect records outside their permission boundary.
+
+**Data migration with provenance.** Moving years of transactional records across to the new platform with full provenance, isolating dirty source rows in a quarantine pipeline instead of silently dropping or "correcting" them.
+
+## How I approach it
+
+**Preserve before you improve.** Unfamiliar data and unexplained tables are kept by default pending business context, never deleted on a hunch.
+
+**Draw a hard line at the money.** Finance and reporting work is gated behind a defined source of truth rather than reverse-engineered from guesswork. Knowing what not to build yet is part of the engineering.
+
+**Prove it with tests.** Every financial, personal-data, and authentication path is covered by tests written first and proved to fail, run against throwaway databases so production is never touched.
+
+## The result
+
+Organisations across agriculture, manufacturing, and finance move from fragile, undocumented systems to platforms that are secure, auditable, and genuinely understood, with the original business history intact and a test suite standing guard over every sensitive path.

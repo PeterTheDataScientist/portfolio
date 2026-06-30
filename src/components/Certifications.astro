@@ -1,0 +1,22 @@
+---
+import { certifications } from '../data/certifications';
+---
+
+<div class="cert-grid">
+  {certifications.map((group) => (
+    <div class="cert-group">
+      <div class="cert-group__head">
+        <h3 class="cert-group__provider">{group.provider}</h3>
+        {group.note && <span class="cert-group__note">{group.note}</span>}
+      </div>
+      <ul class="cert-group__list">
+        {group.items.map((item) => (
+          <li class="cert-item">
+            <span class="cert-item__name">{item.name}</span>
+            {item.date && <span class="cert-item__date">{item.date}</span>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
+</div>

@@ -12,9 +12,25 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+
+const articleURL = new URL(`/blog/${entry.id}`, Astro.site).toString();
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": entry.data.title,
+  "description": entry.data.description,
+  "datePublished": entry.data.date.toISOString(),
+  "url": articleURL,
+  "mainEntityOfPage": articleURL,
+  "author": {
+    "@type": "Person",
+    "name": "Peter Tinashe Mundowa",
+    "url": Astro.site?.toString(),
+  },
+};
 ---
 
-<BaseLayout title={entry.data.title} description={entry.data.description} ogType="article">
+<BaseLayout title={entry.data.title} description={entry.data.description} ogType="article" structuredData={structuredData}>
   <div class="container">
     <section class="case-study__header">
       <a href="/blog" class="case-study__back">&larr; All writing</a>

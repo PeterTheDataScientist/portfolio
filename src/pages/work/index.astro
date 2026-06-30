@@ -1,15 +1,17 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-const work = await getCollection('work');
+const work = (await getCollection('work')).sort(
+  (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
+);
 ---
 
-<BaseLayout title="Work" description="Selected case studies — enterprise AI, production platforms, and applied machine learning.">
+<BaseLayout title="Work" description="Capability areas spanning enterprise AI, production platforms, live ERP integration, and applied machine learning.">
   <div class="container">
     <section class="hero">
       <p class="hero__eyebrow">Work</p>
       <h1 class="hero__title">Built for <em>real problems.</em></h1>
-      <p class="hero__subtitle">Enterprise platforms, AI agent systems, and applied ML — all on production data, for real businesses.</p>
+      <p class="hero__subtitle">Capability areas across applied machine learning, AI engineering, analytics, and the production platforms that put data science to work, all on real data for real businesses.</p>
     </section>
     <section style="padding-bottom: 4rem;">
       <div class="work-grid">

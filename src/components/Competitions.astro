@@ -1,0 +1,20 @@
+---
+import { competitions, zindiProfile } from '../data/competitions';
+---
+
+<ul class="comp-list">
+  {competitions.map((c) => (
+    <li class="comp-item">
+      <span class="comp-item__rank">{c.rank}</span>
+      <span class="comp-item__title">
+        {c.title}
+        {c.repo && (
+          <a class="comp-item__repo" href={c.repo} target="_blank" rel="noopener">code</a>
+        )}
+      </span>
+    </li>
+  ))}
+</ul>
+<p class="comp-profile">
+  <a href={zindiProfile} target="_blank" rel="noopener">Full Zindi profile (PeterTheAnalyst) &rarr;</a>
+</p>

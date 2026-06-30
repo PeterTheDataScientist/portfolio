@@ -3,11 +3,16 @@ interface Props {
   title: string;
   description: string;
   ogType?: string;
+  structuredData?: Record<string, unknown>;
 }
 
-const { title, description, ogType = 'website' } = Astro.props;
+const { title, description, ogType = 'website', structuredData } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const siteName = 'Peter Tinashe Mundowa';
+const pageTitle = `${title} · ${siteName}`;
+
+const pathname = Astro.url.pathname;
+const isActive = (base: string) => pathname === base || pathname.startsWith(base + '/');
 ---
 
 <!DOCTYPE html>
@@ -15,20 +20,20 @@ const siteName = 'Peter Tinashe Mundowa';
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title} — {siteName}</title>
+  <title>{pageTitle}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalURL} />
 
   <!-- Open Graph -->
   <meta property="og:type" content={ogType} />
-  <meta property="og:title" content={`${title} — ${siteName}`} />
+  <meta property="og:title" content={pageTitle} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:site_name" content={siteName} />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={`${title} — ${siteName}`} />
+  <meta name="twitter:title" content={pageTitle} />
   <meta name="twitter:description" content={description} />
 
   <!-- JSON-LD Person Schema -->
@@ -48,23 +53,29 @@ const siteName = 'Peter Tinashe Mundowa';
     },
     "knowsAbout": ["AI Engineering", "Data Science", "Enterprise AI", "Machine Learning", "SAP Business One", "PostgreSQL"],
     "sameAs": [
-      "https://www.linkedin.com/in/petertinashemundowa",
+      "https://www.linkedin.com/in/peter-tinashe-mundowa-758a2b239",
       "https://github.com/PeterTheDataScientist",
-      "https://zindi.africa/users/PeterTheAnalyst"
+      "https://zindi.africa/users/PeterTheAnalyst",
+      "https://rightforeducation.org/author/peter-tinashe-mundowa/",
+      "https://www.itu.int/hub/2026/06/ai-for-good-meet-the-people-powering-machine-learning-solutions/"
     ]
   })} />
+
+  {structuredData && (
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  )}
 
   <link rel="stylesheet" href="/styles/global.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="site-header__inner">
-      <a href="/" class="site-header__name">Peter Mundowa</a>
+      <a href="/" class="site-header__name">Peter Tinashe Mundowa</a>
       <nav class="site-header__nav">
-        <a href="/about" class="site-header__link">About</a>
-        <a href="/work" class="site-header__link">Work</a>
-        <a href="/blog" class="site-header__link">Writing</a>
-        <a href="/contact" class="site-header__link">Contact</a>
+        <a href="/about" class:list={["site-header__link", { "site-header__link--active": isActive("/about") }]}>About</a>
+        <a href="/work" class:list={["site-header__link", { "site-header__link--active": isActive("/work") }]}>Work</a>
+        <a href="/blog" class:list={["site-header__link", { "site-header__link--active": isActive("/blog") }]}>Writing</a>
+        <a href="/contact" class:list={["site-header__link", { "site-header__link--active": isActive("/contact") }]}>Contact</a>
         <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
           <span id="theme-icon">◐</span>
         </button>
@@ -78,9 +89,9 @@ const siteName = 'Peter Tinashe Mundowa';
 
   <footer class="site-footer">
     <div class="site-footer__inner">
-      <span>&copy; {new Date().getFullYear()} Peter Tinashe Mundowa &middot; Harare, Zimbabwe</span>
+      <span>&copy; {new Date().getFullYear()} Peter Tinashe Mundowa &middot; Harare, Zimbabwe 🇿🇼</span>
       <div class="site-footer__links">
-        <a href="https://www.linkedin.com/in/petertinashemundowa" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/peter-tinashe-mundowa-758a2b239" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://github.com/PeterTheDataScientist" target="_blank" rel="noopener">GitHub</a>
         <a href="https://zindi.africa/users/PeterTheAnalyst" target="_blank" rel="noopener">Zindi</a>
       </div>

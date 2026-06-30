@@ -1,21 +1,62 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-const posts = (await getCollection('blog')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+import { externalWriting } from '../../data/external-writing';
+
+const posts = await getCollection('blog');
+
+type Entry = {
+  title: string;
+  date: Date;
+  href: string;
+  external: boolean;
+  source: string | null;
+};
+
+const local: Entry[] = posts.map((post) => ({
+  title: post.data.title,
+  date: post.data.date,
+  href: `/blog/${post.id}`,
+  external: false,
+  source: null,
+}));
+
+const external: Entry[] = externalWriting.map((article) => ({
+  title: article.title,
+  date: new Date(article.date),
+  href: article.url,
+  external: true,
+  source: article.source,
+}));
+
+const entries = [...local, ...external].sort(
+  (a, b) => b.date.valueOf() - a.date.valueOf()
+);
 ---
 
-<BaseLayout title="Writing" description="Thoughts on enterprise AI, data engineering, and building in Africa.">
+<BaseLayout title="Writing" description="Articles on enterprise AI, data engineering, leadership, and building in Africa, by Peter Tinashe Mundowa.">
   <div class="container">
     <section class="hero">
       <p class="hero__eyebrow">Writing</p>
       <h1 class="hero__title">Thinking out <em>loud.</em></h1>
+      <p class="hero__subtitle">Notes on enterprise AI and data engineering, alongside published articles on technology, leadership, and Africa for Right for Education.</p>
     </section>
     <section style="padding-bottom: 4rem;">
       <div class="blog-list">
-        {posts.map((post) => (
-          <a href={`/blog/${post.id}`} class="blog-item">
-            <span class="blog-item__title">{post.data.title}</span>
-            <span class="blog-item__date">{post.data.date.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })}</span>
+        {entries.map((entry) => (
+          <a
+            href={entry.href}
+            class="blog-item"
+            target={entry.external ? '_blank' : undefined}
+            rel={entry.external ? 'noopener' : undefined}
+          >
+            <span class="blog-item__titlewrap">
+              <span class="blog-item__title">{entry.title}</span>
+              {entry.external && entry.source && (
+                <span class="blog-badge">{entry.source}</span>
+              )}
+            </span>
+            <span class="blog-item__date">{entry.date.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })}</span>
           </a>
         ))}
       </div>

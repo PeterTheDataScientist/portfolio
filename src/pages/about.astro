@@ -1,36 +1,124 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Certifications from '../components/Certifications.astro';
+import Competitions from '../components/Competitions.astro';
+import { externalWriting } from '../data/external-writing';
+
+const recentWriting = externalWriting.slice(0, 4);
+
+const ituArticle = 'https://www.itu.int/hub/2026/06/ai-for-good-meet-the-people-powering-machine-learning-solutions/';
 ---
 
 <BaseLayout
   title="About"
-  description="Peter Tinashe Mundowa — Data Scientist and AI Engineer at AI Creative Solutions, building intelligent systems for African enterprises."
+  description="Peter Tinashe Mundowa is a Data Scientist at AI Creative Solutions, building machine learning, analytics, and governed AI systems for African enterprises."
 >
   <div class="container">
     <section class="hero">
       <p class="hero__eyebrow">About</p>
-      <h1 class="hero__title">Building Africa's <em>intelligent</em> infrastructure.</h1>
+      <div class="about-hero">
+        <img
+          class="about-photo"
+          src="/photo.jpg"
+          alt="Peter Tinashe Mundowa"
+          width="200"
+          height="200"
+          loading="eager"
+        />
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat__value">3×</div>
+            <div class="hero-stat__label">Microsoft certifications</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat__value">12+</div>
+            <div class="hero-stat__label">Zindi competitions</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat__value">10+</div>
+            <div class="hero-stat__label">Published articles</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat__value">Aug 2026</div>
+            <div class="hero-stat__label">BSc graduation</div>
+          </div>
+        </div>
+      </div>
+      <h1 class="hero__title">A Data Scientist who ships what he <em>models.</em></h1>
     </section>
 
     <section class="section" style="border-top: none; padding-top: 0;">
       <div class="case-study__content">
-        <p>I build intelligent systems that make enterprises smarter — not on clean demo data, but on production databases with undocumented schemas, conflicting business logic, and columns that mean four different things depending on who entered the record.</p>
+        <p>I started out at a bank, building revenue-assurance dashboards and automating data pipelines across billing systems. That year taught me something I have never let go of: getting a model to work is the easy part, and the real distance is between a model that works in a notebook and a system that delivers a correct answer, every day, to someone who is about to make a decision with it.</p>
 
-        <p>At AI Creative Solutions, I'm the lead engineer on platforms that replace fragmented legacy systems — Access databases, Excel workbooks, and manual accounting — with unified, AI-first operational platforms. The work spans schema archaeology (reverse-engineering 60+ undocumented tables from a 12-year-old system), bank-grade security retrofits (envelope encryption, blind indexes, RBAC with scope concealment over databases that previously stored passwords in plaintext), and live ERP integration against production SAP Business One and Openbravo environments.</p>
+        <p>Today I am a Data Scientist at AI Creative Solutions, where I take the messy, undocumented data organisations actually run on and turn it into models, analytics, and decision systems they can trust. In practice that means feature engineering on data that fights back, analytics pipelines reconciled against a human source of truth, and governed AI agents that are kept nowhere near a number they could invent. I build the production platforms around that work too, because a model only matters once it reaches the people making decisions.</p>
 
-        <p>I've built AI agent architectures that query live enterprise databases in real time — not CSV snapshots — with governance layers that make it architecturally impossible for the system to fabricate a number. One system replaced a ~$100K/year CRM with 75+ purpose-built tables, 44 AI action tools, and a safety layer that parses and scopes every AI-generated query before it touches production data. Another reconciles multi-currency receivables to the penny against a human source of truth before any figure reaches a user.</p>
+        <p>I have a strong opinion about applied AI: the model is the easy part. You can swap it on a Tuesday and nobody notices. The value lives in everything around it, the data wrangling, the feature work, the evidence governance, and the analytics that make a result trustworthy enough to act on. That is the part I build, and it is the part most demos quietly skip.</p>
 
-        <p>Before this, I spent a year at Steward Bank building revenue assurance dashboards and automating data extraction across billing systems. That taught me how real organisations actually use data — and how far the gap is between a model that works and a system that delivers correct answers every day.</p>
-
-        <p>My research — a hybrid CNN-Transformer for crop disease detection under real field conditions — won Best Poster at IndabaX Zimbabwe 2026. I'll represent Zimbabwe at Deep Learning Indaba 2027. I was recently featured in ITU News as one of the people powering machine-learning solutions globally.</p>
-
-        <p>I compete on Zindi as Zimbabwe's Ambassador, organising events, running competitions, and mentoring the next generation of African data practitioners. I write about technology and leadership for Right for Education, reaching audiences across Africa.</p>
+        <p>Beyond client work, I research applied machine learning for African field conditions, compete and organise as Zimbabwe's Zindi Ambassador, and write for audiences across the continent. I care about the same thing in all of it: building things that hold up when they meet the messy reality they were made for.</p>
 
         <h2>Technical range</h2>
-        <p>Python, T-SQL, PostgreSQL, React, TypeScript, Express, Power BI, MindStudio, PyTorch, TensorFlow, YOLOv8, Drizzle ORM, SAP Business One (SQL Server), Openbravo (PostgreSQL), Azure cloud services. I work across the full stack — from database reverse-engineering to production frontend to AI agent orchestration.</p>
+        <p>Python, PyTorch, TensorFlow, scikit-learn, YOLOv8, T-SQL, PostgreSQL, Power BI, MindStudio, React, TypeScript, Express, Drizzle ORM, SAP Business One (SQL Server), Openbravo (PostgreSQL), and Azure cloud services. I work across the full data science lifecycle, from data wrangling and modelling through analytics to production AI systems.</p>
 
-        <h2>Education and credentials</h2>
-        <p>Completing my BSc in Data Science and Informatics at the University of Zimbabwe (August 2026). Microsoft Certified: Azure AI Engineer Associate, Azure Data Scientist Associate, Power BI Data Analyst Associate. McKinsey Forward Program alumnus. WorldQuant University Applied AI Lab graduate.</p>
+        <h2>Education</h2>
+        <p>Completing my BSc in Data Science and Informatics at the University of Zimbabwe, graduating August 2026.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="section__label"><span class="section__num">01</span> Recognition & features</p>
+      <h2 class="section__title">Work that travelled.</h2>
+      <div class="case-study__content">
+        <ul>
+          <li>Featured in <strong>ITU News</strong> (June 2026), <a href={ituArticle} target="_blank" rel="noopener">"AI for Good: Meet the people powering machine-learning solutions"</a>.</li>
+          <li><strong>Best Poster</strong> at IndabaX Zimbabwe 2026 for ZimCropGuard, a hybrid CNN and Vision Transformer for crop disease detection.</li>
+          <li><strong>Selected for the Deep Learning Indaba 2027</strong>, representing Zimbabwe.</li>
+          <li><strong>3rd place</strong> at the ITU AI/ML Global Challenge.</li>
+          <li><strong>Speaker</strong> at IndabaX Zimbabwe 2025 (demo and startup session).</li>
+        </ul>
+        <blockquote style="border-left: 3px solid var(--color-accent); padding-left: 1rem; margin: 1.5rem 0; color: var(--color-text-secondary); font-style: italic;">
+          "Do not wait until you feel fully ready to participate." <span style="font-style: normal; color: var(--color-text-tertiary);">My advice in ITU News.</span>
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="section">
+      <p class="section__label"><span class="section__num">02</span> Competitions</p>
+      <h2 class="section__title">Measured against the field.</h2>
+      <Competitions />
+    </section>
+
+    <section class="section">
+      <p class="section__label"><span class="section__num">03</span> Certifications</p>
+      <h2 class="section__title">Verified, not just claimed.</h2>
+      <Certifications />
+    </section>
+
+    <section class="section">
+      <p class="section__label"><span class="section__num">04</span> Community & leadership</p>
+      <h2 class="section__title">Building the ecosystem.</h2>
+      <ul class="lead-list">
+        <li><strong>Zindi Ambassador for Zimbabwe</strong> (2025 to present): organising events, running competitions, and mentoring practitioners.</li>
+        <li><strong>Right for Education Zimbabwe</strong>: Author (Feb 2024 to present), former Chapter President (Oct 2025 to May 2026), and former Vice President (Aug 2024 to Oct 2025).</li>
+        <li>Organised a career development event that drew <strong>100+ attendees</strong> and ran 90 minutes, extended for an engaged Q&amp;A.</li>
+        <li>Recipient of the <strong>R:Ed Leadership Beacon Award</strong>.</li>
+        <li>Awarded the <strong>R:Ed Certificate of Excellence in Leadership Support</strong>.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <p class="section__label"><span class="section__num">05</span> Published writing</p>
+      <h2 class="section__title">Writing for Africa.</h2>
+      <div class="case-study__content">
+        <p>I write about technology, leadership, and Africa for Right for Education, reaching audiences across the continent. A few recent pieces:</p>
+        <ul class="about-writing">
+          {recentWriting.map((article) => (
+            <li>
+              <a href={article.url} target="_blank" rel="noopener">{article.title}</a>
+            </li>
+          ))}
+        </ul>
+        <p><a href="/blog">See all writing &rarr;</a></p>
       </div>
     </section>
   </div>

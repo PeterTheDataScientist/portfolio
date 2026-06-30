@@ -1,0 +1,35 @@
+---
+title: "AI agent orchestration"
+description: "AI agents that query live enterprise databases in real time, with governance layers that make fabricated answers architecturally impossible."
+sector: "AI engineering"
+tech: ["MindStudio", "PostgreSQL", "Python", "TypeScript", "React"]
+order: 2
+---
+
+## The pattern
+
+Most AI demos run on clean snapshots and small sample data. The hard version is pointing an AI agent at a live production database and trusting its answers enough to act on them. That trust has to be engineered, because a language model left to its own devices will happily invent a number that looks right.
+
+I build AI agents that read live enterprise data in real time, answer questions, and execute instructions, wrapped in governance and safety layers that make it architecturally impossible for the system to fabricate a figure.
+
+## What this work involves
+
+**A query-safety layer.** AI-generated queries are parsed before they run. Anything that is not a read is rejected, every query is rewritten to scope rows to the requesting user's permissions, and result size is hard-capped. A user physically cannot reach data outside their boundary through the assistant.
+
+**Evidence governance.** Numbers come from the database, not the model. Retrieval and calculation are separated from generation so that every figure shown to a user traces back to a real record, not a plausible-sounding guess.
+
+**A deterministic computation layer.** Where planning or financial logic is involved, the queries retrieve and dedicated functions calculate, while the model touches no numbers at all. The result is reproducible: the same question returns the same answer every time.
+
+**Actor-scoped, two-mode assistants.** One mode turns a plain-language question into safe, scoped queries and interprets the result. The other turns an instruction into a validated tool call against a registry of governed actions, each with its own permission checks.
+
+## How I approach it
+
+**Assume the model will lie.** The architecture is designed so that even a confidently wrong model cannot produce a wrong number, because it is never the thing doing the arithmetic.
+
+**Govern every action.** Read access is scoped per user. Write actions go through validated tools, not free-form generation. Every consequential action is written to an immutable audit trail.
+
+**Reconcile to a human source of truth.** Before any agent goes live, its output is reconciled against the figures the team already trusts, down to the last unit.
+
+## The result
+
+Teams get to ask their live operational data questions in plain language and act on the answers, with the confidence that the system cannot quietly make something up. The intelligence is real, and so are the guardrails around it.

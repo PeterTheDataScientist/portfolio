@@ -1,0 +1,49 @@
+---
+title: "Applied ML research: crop disease detection"
+description: "A robustness-engineered hybrid CNN-Transformer that closes the lab-to-field accuracy gap for smallholder farmers using budget phones."
+sector: "Machine learning research"
+tech: ["PyTorch", "ResNet18", "Transformer", "Streamlit", "scikit-learn"]
+order: 1
+---
+
+## The problem
+
+Published plant-disease detection models score 95 to 99 percent on clean laboratory images. But smallholder farmers in Zimbabwe and sub-Saharan Africa take photos under real field conditions: low light, cheap-phone cameras with 5MP sensors and no optical image stabilisation, motion blur, and cluttered backgrounds. Under those conditions, the same models collapse, and these farmers rarely have access to an agronomist.
+
+## What I built
+
+A hybrid CNN-Transformer architecture in PyTorch that classifies ten tomato leaf conditions from a single phone photo, deliberately engineered and measured for robustness to real-world image degradation rather than only reporting clean-lab accuracy.
+
+**The architecture.** An ImageNet-pretrained ResNet18 backbone extracts local texture features. Those feature maps are reshaped into patch tokens and fed into a multi-head self-attention Transformer encoder for global reasoning. A fused classification head produces the final prediction. The model has roughly 14.88 million trainable parameters, sized to run on free-tier CPU inference.
+
+**Two-stage training design.** A baseline model uses standard augmentation, and a hardened model is retrained with aggressive field-simulating augmentation (brightness variation, contrast variation, Gaussian noise and blur, perspective transforms, resolution simulation), MixUp (alpha 0.2), and label smoothing (epsilon 0.1). The architecture and hyperparameters stay identical, so any accuracy gain is attributable to the training strategy alone, not the model. This is the core scientific contribution.
+
+**Structured field-evaluation protocol.** 94 real farm photos across 3 device tiers (budget, mid-range, flagship) and 2 lighting conditions, with disease labels assigned independently by an agricultural specialist. The evaluation is designed to separate model failure from sensor failure, showing that the low-tier confidence drop is a hardware and image-quality effect, not a model-capacity limit.
+
+**Live deployment.** A Streamlit web app on Streamlit Community Cloud. Upload a photo and receive the predicted class, confidence score, top-5 probabilities, and disease-management guidance. No app install is required, so it works from any phone browser.
+
+## The hard parts
+
+**Closing the lab-to-field gap through training strategy alone.** The baseline model performed well on clean data but failed on degraded field images. Rather than swapping in a larger model, I fixed it through augmentation, MixUp, and label smoothing, producing a cleaner, more defensible scientific result and an explicit point of difference from the GAN-based base paper.
+
+**Designing out circular validation bias.** Field labels came from an independent agricultural specialist and were not model-assisted. Device tiers were defined by camera hardware specifications before any results were seen. The evaluation cannot quietly confirm itself.
+
+**Separating model failure from sensor failure.** The field accuracy gradient (64 percent budget, 81.5 percent mid-range, 90.5 percent flagship) required honest interpretation, showing it to be a hardware and image-quality effect rather than glossing over it as most write-ups do.
+
+## Recognition
+
+This work, presented as ZimCropGuard, won **Best Poster at IndabaX Zimbabwe 2026** and was selected for the **Deep Learning Indaba 2027**. I was also featured in [**ITU News**](https://www.itu.int/hub/2026/06/ai-for-good-meet-the-people-powering-machine-learning-solutions/) as one of the people powering machine-learning solutions globally, where I shared the advice I keep coming back to: "Do not wait until you feel fully ready to participate."
+
+## Links
+
+- **Live app and source:** [Tomato Leaf Disease Detector on GitHub](https://github.com/PeterTheDataScientist/Tomato-Leaf-Disease-Detector), with the Streamlit web app linked from the repository.
+- **Related work:** [Maize leaf disease detection](https://github.com/PeterTheDataScientist/maize-leaf-disease-detection), an 8th of 47 finish on the Zindi challenge.
+
+## Impact
+
+- Clean-test accuracy: baseline 95 percent, hardened 93 percent (only 2 points lower)
+- Simulated low-light F1: 0.42 to 0.78, a gain of 36 points, which is the headline result
+- Field accuracy by device tier: 64 percent (budget), 81.5 percent (mid-range), 90.5 percent (flagship)
+- Won Best Poster at IndabaX Zimbabwe 2026
+- Selected for Deep Learning Indaba 2027
+- Live on Streamlit Community Cloud, deployable on free CPU inference
