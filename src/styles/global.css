@@ -89,6 +89,7 @@ a:hover { color: var(--color-accent-hover); }
   top: 0;
   z-index: 100;
   background: var(--color-bg);
+  border-top: 2px solid var(--color-accent);
   border-bottom: 1px solid var(--color-border);
   backdrop-filter: blur(12px);
   background: rgba(250, 250, 248, 0.85);
@@ -148,7 +149,8 @@ a:hover { color: var(--color-accent-hover); }
 
 /* Hero */
 .hero {
-  padding: 6rem 0 4rem;
+  padding: 4rem 0 2.5rem;
+  background: linear-gradient(180deg, var(--color-bg-secondary) 0%, var(--color-bg) 100%);
 }
 
 .hero__eyebrow {
@@ -160,7 +162,7 @@ a:hover { color: var(--color-accent-hover); }
 }
 
 .hero__title {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .hero__title em {
@@ -173,7 +175,7 @@ a:hover { color: var(--color-accent-hover); }
   color: var(--color-text-secondary);
   max-width: 640px;
   line-height: 1.7;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .hero__meta {
@@ -192,7 +194,7 @@ a:hover { color: var(--color-accent-hover); }
 
 /* Sections */
 .section {
-  padding: 4rem 0;
+  padding: 3rem 0;
   border-top: 1px solid var(--color-border);
 }
 
@@ -228,13 +230,15 @@ a:hover { color: var(--color-accent-hover); }
 }
 .work-card:hover {
   border-color: var(--color-accent);
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-bg-secondary);
   transform: translateY(-2px);
   color: inherit;
 }
 
 .work-card__sector {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   background: var(--color-tag-bg);
   color: var(--color-tag-text);
@@ -283,6 +287,7 @@ a:hover { color: var(--color-accent-hover); }
 .tech-tag {
   font-size: 0.75rem;
   color: var(--color-text-tertiary);
+  background: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
   padding: 2px 8px;
   border-radius: 4px;
@@ -345,7 +350,7 @@ a:hover { color: var(--color-accent-hover); }
 
 /* Case study page */
 .case-study__header {
-  padding: 4rem 0 2rem;
+  padding: 2.5rem 0 2rem;
 }
 
 .case-study__back {
@@ -421,10 +426,20 @@ a:hover { color: var(--color-accent-hover); }
 
 /* Footer */
 .site-footer {
+  position: relative;
   padding: 3rem 0;
-  border-top: 1px solid var(--color-border);
   font-size: 0.8125rem;
   color: var(--color-text-tertiary);
+}
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  opacity: 0.5;
 }
 
 .site-footer__inner {
@@ -514,7 +529,7 @@ a:hover { color: var(--color-accent-hover); }
   flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem 2rem;
-  padding: 1.5rem 1.75rem;
+  padding: 1.5rem 2.25rem;
   margin-top: 1.5rem;
   background: linear-gradient(135deg, var(--color-bg-secondary), var(--color-bg));
   border: 1px solid var(--color-border);
@@ -538,7 +553,7 @@ a:hover { color: var(--color-accent-hover); }
 
 .recognition-bar__item {
   font-family: var(--font-display);
-  font-size: 1.0625rem;
+  font-size: 1.125rem;
   font-weight: 600;
   color: var(--color-text-secondary);
 }
@@ -676,6 +691,7 @@ a:hover { color: var(--color-accent-hover); }
 .hero-stat {
   background: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent);
   border-radius: 10px;
   padding: 1.1rem 1.25rem;
 }
@@ -701,6 +717,7 @@ a:hover { color: var(--color-accent-hover); }
 .cert-group {
   background: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent);
   border-radius: 12px;
   padding: 1.5rem;
 }
