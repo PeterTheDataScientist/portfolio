@@ -7,14 +7,36 @@ import { externalWriting } from '../data/external-writing';
 const recentWriting = externalWriting.slice(0, 4);
 
 const ituArticle = 'https://www.itu.int/hub/2026/06/ai-for-good-meet-the-people-powering-machine-learning-solutions/';
+
+const skills = [
+  { name: 'Python', pct: 95 },
+  { name: 'SQL / T-SQL', pct: 92 },
+  { name: 'Power BI & DAX', pct: 88 },
+  { name: 'PyTorch / TensorFlow', pct: 85 },
+  { name: 'React / TypeScript', pct: 82 },
+  { name: 'MindStudio / AI Agents', pct: 88 },
+  { name: 'PostgreSQL', pct: 85 },
+  { name: 'SAP B1 / Openbravo', pct: 80 },
+];
+
+const timeline = [
+  { year: '2026', title: 'Data Scientist, AI Creative Solutions', detail: 'Current role: machine learning, analytics, and governed AI systems on production data.' },
+  { year: '2026', title: 'BSc Data Science graduation', detail: 'University of Zimbabwe.' },
+  { year: '2026', title: 'Best Poster, IndabaX Zimbabwe', detail: 'For ZimCropGuard, with selection for the Deep Learning Indaba 2027.' },
+  { year: '2026', title: 'Featured in ITU News', detail: '"AI for Good: Meet the people powering machine-learning solutions."' },
+  { year: '2025', title: 'Zindi Ambassador for Zimbabwe', detail: 'Organising events, running competitions, and mentoring practitioners.' },
+  { year: '2024-25', title: 'Revenue Assurance Intern, Steward Bank', detail: 'Revenue-assurance dashboards and automated data extraction across billing systems.' },
+  { year: '2024', title: 'R:Ed Zimbabwe: Vice President, then President', detail: 'Leading the Right for Education chapter and its writing programme.' },
+  { year: '2022', title: 'Started BSc Data Science', detail: 'University of Zimbabwe.' },
+];
 ---
 
 <BaseLayout
   title="About"
   description="Peter Tinashe Mundowa is a Data Scientist at AI Creative Solutions, building machine learning, analytics, and governed AI systems for African enterprises."
 >
-  <div class="container">
-    <section class="hero" style="padding-bottom: 0.5rem;">
+  <section class="band band--hero">
+    <div class="container">
       <p class="hero__eyebrow">About</p>
       <div class="about-hero">
         <img
@@ -45,9 +67,11 @@ const ituArticle = 'https://www.itu.int/hub/2026/06/ai-for-good-meet-the-people-
         </div>
       </div>
       <h1 class="hero__title">A Data Scientist who ships what he <em>models.</em></h1>
-    </section>
+    </div>
+  </section>
 
-    <section class="section" style="border-top: none; padding-top: 0;">
+  <section class="band">
+    <div class="container">
       <div class="case-study__content">
         <p>I started out at a bank, building revenue-assurance dashboards and automating data pipelines across billing systems. That year taught me something I have never let go of: getting a model to work is the easy part, and the real distance is between a model that works in a notebook and a system that delivers a correct answer, every day, to someone who is about to make a decision with it.</p>
 
@@ -63,10 +87,50 @@ const ituArticle = 'https://www.itu.int/hub/2026/06/ai-for-good-meet-the-people-
         <h2>Education</h2>
         <p>Completing my BSc in Data Science and Informatics at the University of Zimbabwe, graduating August 2026.</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section">
-      <p class="section__label"><span class="section__num">01</span> Recognition & features</p>
+  <section class="band band--alt">
+    <div class="container">
+      <p class="section__label"><span class="section__num">01</span> Technical proficiency</p>
+      <h2 class="section__title">Where my hours go.</h2>
+      <div class="skills-grid">
+        {skills.map((s) => (
+          <div class="skill">
+            <div class="skill__head">
+              <span class="skill__name">{s.name}</span>
+              <span class="skill__pct">{s.pct}%</span>
+            </div>
+            <div class="skill__track">
+              <span class="skill__fill" style={`--pct: ${s.pct}%`}></span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <p class="section__label"><span class="section__num">02</span> Career timeline</p>
+      <h2 class="section__title">The path so far.</h2>
+      <ul class="timeline">
+        {timeline.map((t) => (
+          <li class="timeline__item">
+            <span class="timeline__year">{t.year}</span>
+            <div class="timeline__body">
+              <span class="timeline__title">{t.title}</span>
+              <span class="timeline__detail">{t.detail}</span>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="band band--alt">
+    <div class="container">
+      <p class="section__label"><span class="section__num">03</span> Recognition & features</p>
       <h2 class="section__title">Work that travelled.</h2>
       <div class="case-study__content">
         <ul>
@@ -80,22 +144,28 @@ const ituArticle = 'https://www.itu.int/hub/2026/06/ai-for-good-meet-the-people-
           "Do not wait until you feel fully ready to participate." <span style="font-style: normal; color: var(--color-text-tertiary);">My advice in ITU News.</span>
         </blockquote>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section">
-      <p class="section__label"><span class="section__num">02</span> Competitions</p>
+  <section class="band">
+    <div class="container">
+      <p class="section__label"><span class="section__num">04</span> Competitions</p>
       <h2 class="section__title">Measured against the field.</h2>
       <Competitions />
-    </section>
+    </div>
+  </section>
 
-    <section class="section">
-      <p class="section__label"><span class="section__num">03</span> Certifications</p>
+  <section class="band band--alt">
+    <div class="container">
+      <p class="section__label"><span class="section__num">05</span> Certifications</p>
       <h2 class="section__title">Verified, not just claimed.</h2>
       <Certifications />
-    </section>
+    </div>
+  </section>
 
-    <section class="section">
-      <p class="section__label"><span class="section__num">04</span> Community & leadership</p>
+  <section class="band">
+    <div class="container">
+      <p class="section__label"><span class="section__num">06</span> Community & leadership</p>
       <h2 class="section__title">Building the ecosystem.</h2>
       <ul class="lead-list">
         <li><strong>Zindi Ambassador for Zimbabwe</strong> (2025 to present): organising events, running competitions, and mentoring practitioners.</li>
@@ -104,10 +174,12 @@ const ituArticle = 'https://www.itu.int/hub/2026/06/ai-for-good-meet-the-people-
         <li>Recipient of the <strong>R:Ed Leadership Beacon Award</strong>.</li>
         <li>Awarded the <strong>R:Ed Certificate of Excellence in Leadership Support</strong>.</li>
       </ul>
-    </section>
+    </div>
+  </section>
 
-    <section class="section">
-      <p class="section__label"><span class="section__num">05</span> Published writing</p>
+  <section class="band band--alt">
+    <div class="container">
+      <p class="section__label"><span class="section__num">07</span> Published writing</p>
       <h2 class="section__title">Writing for Africa.</h2>
       <div class="case-study__content">
         <p>I write about technology, leadership, and Africa for Right for Education, reaching audiences across the continent. A few recent pieces:</p>
@@ -120,6 +192,6 @@ const ituArticle = 'https://www.itu.int/hub/2026/06/ai-for-good-meet-the-people-
         </ul>
         <p><a href="/blog">See all writing &rarr;</a></p>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </BaseLayout>

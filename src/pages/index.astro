@@ -2,22 +2,29 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Certifications from '../components/Certifications.astro';
 import Competitions from '../components/Competitions.astro';
+
+const metrics = [
+  { value: '225,000+', label: 'Transactions analysed' },
+  { value: '95.56%', label: 'Schema join accuracy' },
+  { value: '+36pt', label: 'Low-light F1 improvement' },
+  { value: '5 min', label: 'Insight turnaround (from days)' },
+];
 ---
 
 <BaseLayout
   title="Data Scientist & AI Engineer"
   description="Peter Tinashe Mundowa is a Data Scientist and AI Engineer turning messy enterprise data into models, analytics, and governed AI agents. Based in Harare, Zimbabwe."
 >
-  <div class="container">
-    <section class="hero">
+  <section class="band band--hero">
+    <div class="container">
       <div class="hero__accent"></div>
       <div class="hero__header">
         <img
           class="hero__photo"
           src="/photo.jpg"
           alt="Peter Tinashe Mundowa"
-          width="120"
-          height="120"
+          width="160"
+          height="160"
           loading="eager"
         />
         <div>
@@ -41,19 +48,25 @@ import Competitions from '../components/Competitions.astro';
         <span class="now-bar__tag"><span class="now-bar__dot"></span>Now</span>
         <span>Data Scientist at AI Creative Solutions, building ML systems, analytics pipelines, and governed AI agents.</span>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="recognition-bar" aria-label="Recognition">
-      <span class="recognition-bar__label">As featured in</span>
-      <div class="recognition-bar__items">
-        <span class="recognition-bar__item"><a href="https://www.itu.int/hub/2026/06/ai-for-good-meet-the-people-powering-machine-learning-solutions/" target="_blank" rel="noopener">ITU News</a></span>
-        <span class="recognition-bar__item">IndabaX Zimbabwe</span>
-        <span class="recognition-bar__item">Deep Learning Indaba</span>
-        <span class="recognition-bar__item"><a href="https://zindi.africa/users/PeterTheAnalyst" target="_blank" rel="noopener">Zindi</a></span>
+  <section class="band band--feature" aria-label="Recognition">
+    <div class="container">
+      <div class="recognition-bar">
+        <span class="recognition-bar__label">As featured in</span>
+        <div class="recognition-bar__items">
+          <span class="recognition-bar__item"><a href="https://www.itu.int/hub/2026/06/ai-for-good-meet-the-people-powering-machine-learning-solutions/" target="_blank" rel="noopener">ITU News</a></span>
+          <span class="recognition-bar__item">IndabaX Zimbabwe</span>
+          <span class="recognition-bar__item">Deep Learning Indaba</span>
+          <span class="recognition-bar__item"><a href="https://zindi.africa/users/PeterTheAnalyst" target="_blank" rel="noopener">Zindi</a></span>
+        </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section" id="work">
+  <section class="band" id="work">
+    <div class="container">
       <p class="section__label"><span class="section__num">01</span> Selected work</p>
       <h2 class="section__title">Data science, put into production.</h2>
       <div class="work-grid">
@@ -120,21 +133,40 @@ import Competitions from '../components/Competitions.astro';
         </a>
       </div>
       <p class="view-all"><a href="/work">View all work &rarr;</a></p>
-    </section>
+    </div>
+  </section>
 
-    <section class="section">
+  <section class="band band--alt">
+    <div class="container">
+      <p class="section__label">By the numbers</p>
+      <h2 class="section__title">Impact, measured.</h2>
+      <div class="metric-grid">
+        {metrics.map((m) => (
+          <div class="metric">
+            <div class="metric__value">{m.value}</div>
+            <div class="metric__label">{m.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
       <p class="section__label"><span class="section__num">02</span> Data science & ML</p>
       <h2 class="section__title">Measured against the field.</h2>
       <p class="hero__subtitle" style="margin-bottom: 1.5rem;">
         I compete on Zindi as Zimbabwe's Ambassador, across computer vision, fraud detection, and tabular ML.
       </p>
       <Competitions />
-    </section>
+    </div>
+  </section>
 
-    <section class="section">
+  <section class="band band--alt">
+    <div class="container">
       <p class="section__label"><span class="section__num">03</span> Certifications</p>
       <h2 class="section__title">Verified, not just claimed.</h2>
       <Certifications />
-    </section>
-  </div>
+    </div>
+  </section>
 </BaseLayout>

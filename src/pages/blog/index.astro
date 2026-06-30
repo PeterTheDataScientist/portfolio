@@ -35,13 +35,15 @@ const entries = [...local, ...external].sort(
 ---
 
 <BaseLayout title="Writing" description="Articles on enterprise AI, data engineering, leadership, and building in Africa, by Peter Tinashe Mundowa.">
-  <div class="container">
-    <section class="hero">
+  <section class="band band--hero">
+    <div class="container">
       <p class="hero__eyebrow">Writing</p>
       <h1 class="hero__title">Thinking out <em>loud.</em></h1>
       <p class="hero__subtitle">Notes on enterprise AI and data engineering, alongside published articles on technology, leadership, and Africa for Right for Education.</p>
-    </section>
-    <section style="padding-bottom: 4rem;">
+    </div>
+  </section>
+  <section class="band">
+    <div class="container">
       <div class="blog-list">
         {entries.map((entry) => (
           <a
@@ -60,6 +62,6 @@ const entries = [...local, ...external].sort(
           </a>
         ))}
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </BaseLayout>

@@ -7,13 +7,15 @@ const work = (await getCollection('work')).sort(
 ---
 
 <BaseLayout title="Work" description="Capability areas spanning enterprise AI, production platforms, live ERP integration, and applied machine learning.">
-  <div class="container">
-    <section class="hero">
+  <section class="band band--hero">
+    <div class="container">
       <p class="hero__eyebrow">Work</p>
       <h1 class="hero__title">Built for <em>real problems.</em></h1>
       <p class="hero__subtitle">Capability areas across applied machine learning, AI engineering, analytics, and the production platforms that put data science to work, all on real data for real businesses.</p>
-    </section>
-    <section style="padding-bottom: 4rem;">
+    </div>
+  </section>
+  <section class="band">
+    <div class="container">
       <div class="work-grid">
         {work.map((project) => (
           <a href={`/work/${project.id}`} class="work-card">
@@ -26,6 +28,6 @@ const work = (await getCollection('work')).sort(
           </a>
         ))}
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </BaseLayout>

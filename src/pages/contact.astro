@@ -3,13 +3,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="Contact" description="Get in touch with Peter Tinashe Mundowa about enterprise AI, data infrastructure, and collaborations.">
-  <div class="container">
-    <section class="hero">
+  <section class="band band--hero">
+    <div class="container">
       <p class="hero__eyebrow">Contact</p>
       <h1 class="hero__title">Got a problem worth <em>solving?</em></h1>
       <p class="hero__subtitle">Open to conversations about enterprise AI, data infrastructure, and collaborations that move the African tech ecosystem forward.</p>
-    </section>
-    <section style="padding-bottom: 4rem;">
+    </div>
+  </section>
+  <section class="band">
+    <div class="container">
       <div class="contact-links">
         <button class="contact-link email-reveal" id="email-reveal" type="button" aria-label="Reveal email address">
           <span>Email</span>
@@ -36,8 +38,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <span class="contact-link__label">Author on African tech and education</span>
         </a>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 
   <script is:inline>
     (function () {

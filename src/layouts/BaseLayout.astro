@@ -89,11 +89,14 @@ const isActive = (base: string) => pathname === base || pathname.startsWith(base
 
   <footer class="site-footer">
     <div class="site-footer__inner">
-      <span>&copy; {new Date().getFullYear()} Peter Tinashe Mundowa &middot; Harare, Zimbabwe 🇿🇼</span>
-      <div class="site-footer__links">
-        <a href="https://www.linkedin.com/in/peter-tinashe-mundowa-758a2b239" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://github.com/PeterTheDataScientist" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://zindi.africa/users/PeterTheAnalyst" target="_blank" rel="noopener">Zindi</a>
+      <span class="site-footer__brand">Peter Tinashe Mundowa</span>
+      <div class="site-footer__bottom">
+        <span>&copy; {new Date().getFullYear()} Peter Tinashe Mundowa &middot; Harare, Zimbabwe 🇿🇼</span>
+        <div class="site-footer__links">
+          <a href="https://www.linkedin.com/in/peter-tinashe-mundowa-758a2b239" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/PeterTheDataScientist" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://zindi.africa/users/PeterTheAnalyst" target="_blank" rel="noopener">Zindi</a>
+        </div>
       </div>
     </div>
   </footer>
