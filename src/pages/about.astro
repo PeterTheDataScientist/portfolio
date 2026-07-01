@@ -8,15 +8,11 @@ const recentWriting = externalWriting.slice(0, 4);
 
 const ituArticle = 'https://www.itu.int/hub/2026/06/ai-for-good-meet-the-people-powering-machine-learning-solutions/';
 
-const skills = [
-  { name: 'Python', pct: 95 },
-  { name: 'SQL / T-SQL', pct: 92 },
-  { name: 'Power BI & DAX', pct: 88 },
-  { name: 'PyTorch / TensorFlow', pct: 85 },
-  { name: 'React / TypeScript', pct: 82 },
-  { name: 'MindStudio / AI Agents', pct: 88 },
-  { name: 'PostgreSQL', pct: 85 },
-  { name: 'SAP B1 / Openbravo', pct: 80 },
+const skillGroups = [
+  { tier: 'Core', note: 'daily tools', items: ['Python', 'SQL / T-SQL', 'PostgreSQL', 'Power BI', 'PyTorch', 'React'] },
+  { tier: 'Production', note: 'build and ship with', items: ['Express', 'TypeScript', 'Drizzle ORM', 'MindStudio', 'Streamlit'] },
+  { tier: 'Frameworks & libraries', note: '', items: ['TensorFlow', 'scikit-learn', 'LightGBM', 'XGBoost', 'YOLOv8', 'OpenCV'] },
+  { tier: 'Platforms & infrastructure', note: '', items: ['SAP Business One', 'Openbravo', 'Azure', 'AWS', 'GitHub'] },
 ];
 
 const timeline = [
@@ -94,16 +90,15 @@ const timeline = [
     <div class="container">
       <p class="section__label"><span class="section__num">01</span> Technical proficiency</p>
       <h2 class="section__title">Where my hours go.</h2>
-      <div class="skills-grid">
-        {skills.map((s) => (
-          <div class="skill" data-reveal>
-            <div class="skill__head">
-              <span class="skill__name">{s.name}</span>
-            </div>
-            <div class="skill__track">
-              <span class="skill__fill" style={`--pct: ${s.pct}%`}>
-                <span class="skill__pct">{s.pct}%</span>
-              </span>
+      <div class="skill-groups">
+        {skillGroups.map((g) => (
+          <div class="skill-group" data-reveal>
+            <h3 class="skill-group__title">
+              {g.tier}
+              {g.note && <span class="skill-group__note">{g.note}</span>}
+            </h3>
+            <div class="skill-group__tags">
+              {g.items.map((item) => <span class="tech-tag tech-tag--lg">{item}</span>)}
             </div>
           </div>
         ))}

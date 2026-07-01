@@ -3,7 +3,7 @@ import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 
 export default defineConfig({
-  site: 'https://petermundowa.dev',
+  site: 'https://peterthedatascientist.github.io',
   integrations: [sitemap(), mdx()],
   output: 'static',
 });

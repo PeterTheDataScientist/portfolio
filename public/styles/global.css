@@ -902,51 +902,36 @@ a:hover { color: var(--color-accent-hover); }
   color: var(--color-accent);
 }
 
-/* Skills proficiency bars */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.25rem 2.5rem;
+/* Grouped skill tags */
+.skill-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
 }
-.skill__head {
+.skill-group__title {
   display: flex;
   align-items: baseline;
-  margin-bottom: 0.4rem;
-}
-.skill__name {
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: var(--color-text);
-}
-.skill__track {
-  height: 22px;
-  background: var(--color-border);
-  border-radius: 999px;
-  overflow: hidden;
-}
-.skill__fill {
-  height: 100%;
-  width: 0;
-  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-hover));
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 0.7rem;
-  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.skill.reveal .skill__fill {
-  width: var(--pct);
-}
-.skill__pct {
+  gap: 0.6rem;
   font-family: var(--font-display);
+  font-size: 1.0625rem;
   font-weight: 600;
-  font-size: 0.75rem;
-  color: #fff;
-  font-variant-numeric: tabular-nums;
+  margin-bottom: 0.85rem;
 }
-[data-theme="dark"] .skill__pct {
-  color: #06201C;
+.skill-group__note {
+  font-size: 0.75rem;
+  font-weight: 400;
+  font-family: var(--font-body);
+  color: var(--color-text-tertiary);
+  letter-spacing: 0.01em;
+}
+.skill-group__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.tech-tag--lg {
+  font-size: 0.875rem;
+  padding: 6px 14px;
 }
 
 /* Career timeline */
@@ -1109,7 +1094,6 @@ a:hover { color: var(--color-accent-hover); }
   .comp-item { flex-direction: column; gap: 0.2rem; }
   .comp-item__rank { min-width: 0; }
   .work-grid { grid-template-columns: 1fr; }
-  .skills-grid { grid-template-columns: 1fr; }
   .metric-grid { grid-template-columns: repeat(2, 1fr); }
   .timeline__item { grid-template-columns: 3.25rem 1fr; gap: 0.875rem; }
   .timeline__year { font-size: 0.8125rem; }
@@ -1137,7 +1121,6 @@ a:hover { color: var(--color-accent-hover); }
     transform: none;
     transition: none;
   }
-  .skill__fill { transition: none; }
   .timeline__body::before { transform: scale(1); transition: none; }
 }
 
@@ -1182,9 +1165,6 @@ a:hover { color: var(--color-accent-hover); }
   .hero__photo {
     box-shadow: none !important;
     border: 1px solid #000;
-  }
-  .skill__fill {
-    width: var(--pct) !important;
   }
   a {
     color: #000 !important;
