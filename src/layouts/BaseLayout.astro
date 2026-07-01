@@ -20,8 +20,10 @@ const isActive = (base: string) => pathname === base || pathname.startsWith(base
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2A7B6F" />
   <title>{pageTitle}</title>
   <meta name="description" content={description} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="canonical" href={canonicalURL} />
 
   <!-- Open Graph -->
@@ -93,8 +95,8 @@ const isActive = (base: string) => pathname === base || pathname.startsWith(base
       <div class="site-footer__bottom">
         <span>&copy; {new Date().getFullYear()} Peter Tinashe Mundowa &middot; Harare, Zimbabwe 🇿🇼</span>
         <div class="site-footer__links">
-          <a href="https://www.linkedin.com/in/peter-tinashe-mundowa-758a2b239" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/PeterTheDataScientist" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/peter-tinashe-mundowa-758a2b239" target="_blank" rel="me noopener">LinkedIn</a>
+          <a href="https://github.com/PeterTheDataScientist" target="_blank" rel="me noopener">GitHub</a>
           <a href="https://zindi.africa/users/PeterTheAnalyst" target="_blank" rel="noopener">Zindi</a>
         </div>
       </div>
@@ -117,6 +119,77 @@ const isActive = (base: string) => pathname === base || pathname.startsWith(base
         localStorage.setItem('theme', next);
         icon.textContent = next === 'dark' ? '☀' : '◐';
       });
+    })();
+  </script>
+
+  <script is:inline>
+    (function() {
+      // Header shadow / opacity on scroll
+      const header = document.querySelector('.site-header');
+      if (header) {
+        const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 100);
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+      }
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Count-up animation for metric numbers
+      function runCounter(el) {
+        const target = parseFloat(el.getAttribute('data-count'));
+        if (isNaN(target)) return;
+        const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
+        const prefix = el.getAttribute('data-prefix') || '';
+        const suffix = el.getAttribute('data-suffix') || '';
+        const format = (v) => {
+          const n = decimals > 0
+            ? v.toFixed(decimals)
+            : Math.round(v).toLocaleString('en-US');
+          return prefix + n + suffix;
+        };
+        if (reduceMotion) { el.textContent = format(target); return; }
+        const duration = 1000;
+        let start = null;
+        function step(ts) {
+          if (start === null) start = ts;
+          const p = Math.min((ts - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = format(target * eased);
+          if (p < 1) requestAnimationFrame(step);
+          else el.textContent = format(target);
+        }
+        requestAnimationFrame(step);
+      }
+
+      // Reveal-on-scroll (also triggers counters + skill bars via .reveal class)
+      const revealEls = document.querySelectorAll('[data-reveal]');
+      const counters = document.querySelectorAll('.metric__value[data-count]');
+
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        revealEls.forEach((el) => el.classList.add('reveal'));
+        counters.forEach(runCounter);
+        return;
+      }
+
+      const revealObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      revealEls.forEach((el) => revealObserver.observe(el));
+
+      const counterObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            runCounter(entry.target);
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      counters.forEach((el) => counterObserver.observe(el));
     })();
   </script>
 </body>

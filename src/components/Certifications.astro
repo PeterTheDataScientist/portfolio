@@ -4,7 +4,7 @@ import { certifications } from '../data/certifications';
 
 <div class="cert-grid">
   {certifications.map((group) => (
-    <div class="cert-group">
+    <div class="cert-group" data-reveal>
       <div class="cert-group__head">
         <h3 class="cert-group__provider">{group.provider}</h3>
         {group.note && <span class="cert-group__note">{group.note}</span>}

@@ -48,19 +48,19 @@ const timeline = [
           loading="eager"
         />
         <div class="hero-stats">
-          <div class="hero-stat">
+          <div class="hero-stat" data-reveal>
             <div class="hero-stat__value">3×</div>
             <div class="hero-stat__label">Microsoft certifications</div>
           </div>
-          <div class="hero-stat">
+          <div class="hero-stat" data-reveal>
             <div class="hero-stat__value">12+</div>
             <div class="hero-stat__label">Zindi competitions</div>
           </div>
-          <div class="hero-stat">
+          <div class="hero-stat" data-reveal>
             <div class="hero-stat__value">10+</div>
             <div class="hero-stat__label">Published articles</div>
           </div>
-          <div class="hero-stat">
+          <div class="hero-stat" data-reveal>
             <div class="hero-stat__value">Aug 2026</div>
             <div class="hero-stat__label">BSc graduation</div>
           </div>
@@ -96,13 +96,14 @@ const timeline = [
       <h2 class="section__title">Where my hours go.</h2>
       <div class="skills-grid">
         {skills.map((s) => (
-          <div class="skill">
+          <div class="skill" data-reveal>
             <div class="skill__head">
               <span class="skill__name">{s.name}</span>
-              <span class="skill__pct">{s.pct}%</span>
             </div>
             <div class="skill__track">
-              <span class="skill__fill" style={`--pct: ${s.pct}%`}></span>
+              <span class="skill__fill" style={`--pct: ${s.pct}%`}>
+                <span class="skill__pct">{s.pct}%</span>
+              </span>
             </div>
           </div>
         ))}
@@ -116,7 +117,7 @@ const timeline = [
       <h2 class="section__title">The path so far.</h2>
       <ul class="timeline">
         {timeline.map((t) => (
-          <li class="timeline__item">
+          <li class="timeline__item" data-reveal>
             <span class="timeline__year">{t.year}</span>
             <div class="timeline__body">
               <span class="timeline__title">{t.title}</span>
@@ -168,11 +169,11 @@ const timeline = [
       <p class="section__label"><span class="section__num">06</span> Community & leadership</p>
       <h2 class="section__title">Building the ecosystem.</h2>
       <ul class="lead-list">
-        <li><strong>Zindi Ambassador for Zimbabwe</strong> (2025 to present): organising events, running competitions, and mentoring practitioners.</li>
-        <li><strong>Right for Education Zimbabwe</strong>: Author (Feb 2024 to present), former Chapter President (Oct 2025 to May 2026), and former Vice President (Aug 2024 to Oct 2025).</li>
-        <li>Organised a career development event that drew <strong>100+ attendees</strong> and ran 90 minutes, extended for an engaged Q&amp;A.</li>
-        <li>Recipient of the <strong>R:Ed Leadership Beacon Award</strong>.</li>
-        <li>Awarded the <strong>R:Ed Certificate of Excellence in Leadership Support</strong>.</li>
+        <li data-reveal><strong>Zindi Ambassador for Zimbabwe</strong> (2025 to present): organising events, running competitions, and mentoring practitioners.</li>
+        <li data-reveal><strong>Right for Education Zimbabwe</strong>: Author (Feb 2024 to present), former Chapter President (Oct 2025 to May 2026), and former Vice President (Aug 2024 to Oct 2025).</li>
+        <li data-reveal>Organised a career development event that drew <strong>100+ attendees</strong> and ran 90 minutes, extended for an engaged Q&amp;A.</li>
+        <li data-reveal>Recipient of the <strong>R:Ed Leadership Beacon Award</strong>.</li>
+        <li data-reveal>Awarded the <strong>R:Ed Certificate of Excellence in Leadership Support</strong>.</li>
       </ul>
     </div>
   </section>

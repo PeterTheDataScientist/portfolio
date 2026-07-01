@@ -10,7 +10,7 @@ const positionOf = (rank: number, total: number) =>
   {competitions.map((c) => {
     const pos = positionOf(c.rank, c.total);
     return (
-      <li class="rank-row">
+      <li class="rank-row" data-reveal>
         <div class="rank-row__head">
           <span class="rank-row__place">{c.place}</span>
           <span class="rank-row__of">of {c.total}</span>

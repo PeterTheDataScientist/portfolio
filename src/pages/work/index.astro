@@ -18,7 +18,7 @@ const work = (await getCollection('work')).sort(
     <div class="container">
       <div class="work-grid">
         {work.map((project) => (
-          <a href={`/work/${project.id}`} class="work-card">
+          <a href={`/work/${project.id}`} class="work-card" data-reveal>
             <span class="work-card__sector">{project.data.sector}</span>
             <h3 class="work-card__title">{project.data.title}</h3>
             <p class="work-card__desc">{project.data.description}</p>
