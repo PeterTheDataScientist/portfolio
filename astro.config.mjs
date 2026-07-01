@@ -3,7 +3,7 @@ import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 
 export default defineConfig({
-  site: 'https://petermundowa.vercel.app',
+  site: 'https://petermundowa.com',
   integrations: [sitemap(), mdx()],
   output: 'static',
 });
