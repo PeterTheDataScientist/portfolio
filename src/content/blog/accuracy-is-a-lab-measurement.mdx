@@ -1,0 +1,23 @@
+---
+title: "Accuracy is a lab measurement"
+description: "A model that scores 95 percent on a clean test set can fall apart on a cheap phone in bad light. Robustness is a training decision, not an afterthought."
+date: 2026-07-06
+---
+
+My dissertation model scored 95 percent on the test set. Then I gave it photos taken on a budget phone in bad light, and watched it fall apart.
+
+This is the quiet failure mode of applied machine learning. The published papers report accuracy on clean, well lit, centred images. The users have a cracked phone screen, a 5 megapixel camera, and ten minutes of daylight left. The gap between those two worlds is where deployed models go to die.
+
+For my final year research on crop disease detection, I made that gap the whole project. Two models, identical architecture, identical hyperparameters. One trained conventionally. One trained with aggressive augmentation that simulated the field: heavy brightness shifts, noise, blur, perspective distortion, low resolution, plus MixUp and label smoothing.
+
+The conventional model kept its lab score and collapsed outside it. The hardened model gave up 2 points of clean accuracy and gained 36 points of F1 in simulated low light. On real farm photos across three tiers of phone, its accuracy climbed steadily with camera quality, which told me the remaining errors were sensor limits, not model limits. That is a distinction worth knowing before you blame your own work.
+
+The lesson generalises far beyond leaves.
+
+Evaluate under conditions of use, not conditions of collection. If your users have budget devices, test on budget devices. If the data arrives messy, test on mess.
+
+Robustness is a training decision. You do not bolt it on afterwards. You choose it when you design the augmentation, and you pay for it with a little clean accuracy up front.
+
+Report the ugly numbers. My best result was not the 95. It was showing exactly where and why performance dropped, with an evaluation designed so it could not quietly confirm itself.
+
+A model that only works in the lab is a lab result. The interesting work starts when you take it outside.

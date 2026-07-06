@@ -1,0 +1,29 @@
+---
+title: "An empty field is never empty"
+description: "NULL, zero, N/A and a blank string look identical on screen. They are four different stories, and your pipeline needs to know which one it is reading."
+date: 2026-07-06
+---
+
+Every data person eventually meets the same four characters: NULL, zero, "N/A", and the blank string. On screen they look identical. An empty cell. Nothing to see.
+
+They are four different stories.
+
+NULL usually means nobody asked. The record was created, the field existed, and no one ever touched it. Zero means somebody asked and the answer was nothing. "N/A" means somebody asked and the question did not apply. A blank string often means the system forced a person to enter something, so they entered nothing, on purpose.
+
+The trouble starts when a pipeline treats them as one thing. Average a column where genuine zeros sit next to NULLs that were converted to zero during some long forgotten cleanup, and the result is a number that looks precise and means nothing. Count "completed" fields where blank strings pass the NOT NULL check, and your completion rate is a work of fiction.
+
+I have watched a single overloaded status column mean four different things depending on which department entered the record and what year it was. Nobody documented the change. The people who made it moved on. The data kept arriving.
+
+So, some rules I now follow before trusting any column.
+
+Profile it first. Select the distinct values and their counts before you aggregate anything. Five minutes of looking saves five weeks of explaining.
+
+Ask the people who type. The person entering data knows what a blank means in their workflow. The schema does not.
+
+Encode the difference. If "not applicable" and "unknown" are different states in the business, they should be different values in the data. A nullable column carrying three meanings is a debt you will repay with interest.
+
+Never clean by flattening. Converting everything ambiguous to zero feels tidy. It is quiet data destruction.
+
+The most dangerous number in a report is the one that looks complete. It has a decimal point, it sits in a nicely formatted cell, and somewhere upstream it swallowed a thousand empty fields whole.
+
+Look inside the empty cells first. They are never empty. They are full of decisions someone made years ago and never wrote down.

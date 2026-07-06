@@ -11,5 +11,8 @@
     "@astrojs/mdx": "^7.0.0",
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^7.0.4"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.3"
   }
 }

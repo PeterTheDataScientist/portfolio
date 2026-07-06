@@ -12,7 +12,13 @@ import { certifications } from '../data/certifications';
       <ul class="cert-group__list">
         {group.items.map((item) => (
           <li class="cert-item">
-            <span class="cert-item__name">{item.name}</span>
+            {item.url ? (
+              <a class="cert-item__name cert-item__link" href={item.url} target="_blank" rel="noopener">
+                {item.name}<span class="cert-item__verify">Verify &nearr;</span>
+              </a>
+            ) : (
+              <span class="cert-item__name">{item.name}</span>
+            )}
             {item.date && <span class="cert-item__date">{item.date}</span>}
           </li>
         ))}
