@@ -10,12 +10,9 @@ export const certifications: CertGroup[] = [
     provider: 'Microsoft',
     note: 'Active',
     items: [
-      // TODO: Paste share link from learn.microsoft.com credentials page
-      { name: 'Azure AI Engineer Associate', date: '2025', url: undefined },
-      // TODO: Paste share link from learn.microsoft.com credentials page
-      { name: 'Azure Data Scientist Associate', date: '2025', url: undefined },
-      // TODO: Paste share link from learn.microsoft.com credentials page
-      { name: 'Power BI Data Analyst Associate', date: '2025', url: undefined },
+      { name: 'Azure AI Engineer Associate', date: '2026', url: 'https://learn.microsoft.com/api/credentials/share/en-gb/PeterTinasheMundowa-8664/72C89E29826DE84B?sharingId=C97199ED0393A4E1' },
+      { name: 'Azure Data Scientist Associate', date: '2026', url: 'https://learn.microsoft.com/api/credentials/share/en-us/TinasheMundowa-6953/8BBB7D478FF3A5BF?sharingId=52B7F9BC4F7536B3' },
+      { name: 'Power BI Data Analyst Associate', date: '2026', url: 'https://learn.microsoft.com/api/credentials/share/en-gb/PeterTinasheMundowa-8664/5AF5F96C0CAFAF49?sharingId=C97199ED0393A4E1' },
     ],
   },
   {

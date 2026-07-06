@@ -1,0 +1,55 @@
+---
+import { Image } from 'astro:assets';
+
+// Auto-renders any images dropped into src/assets/moments/.
+// Filename convention: YYYY-MM-short-description.jpg
+// Add photos later with zero code changes.
+type ImageMod = { default: ImageMetadata };
+const modules = import.meta.glob<ImageMod>(
+  '/src/assets/moments/*.{jpg,jpeg,png,webp}',
+  { eager: true }
+);
+
+const titleCase = (s: string) =>
+  s.replace(/\b\w/g, (c) => c.toUpperCase());
+
+const captionFor = (path: string) => {
+  const file = path.split('/').pop() ?? '';
+  const stem = file.replace(/\.[^.]+$/, '');
+  const withoutDate = stem.replace(/^\d{4}-\d{2}-/, '');
+  return titleCase(withoutDate.replace(/-/g, ' '));
+};
+
+const dateKey = (path: string) => {
+  const file = path.split('/').pop() ?? '';
+  const match = file.match(/^(\d{4}-\d{2})/);
+  return match ? match[1] : '0000-00';
+};
+
+const moments = Object.entries(modules)
+  .map(([path, mod]) => ({
+    image: mod.default,
+    caption: captionFor(path),
+    key: dateKey(path),
+  }))
+  .sort((a, b) => b.key.localeCompare(a.key))
+  .slice(0, 6);
+---
+
+{moments.length > 0 && (
+  <div class="moments-grid">
+    {moments.map((m) => (
+      <figure class="moment" data-reveal>
+        <Image
+          class="moment__img"
+          src={m.image}
+          alt={m.caption}
+          width={m.image.width}
+          height={m.image.height}
+          loading="lazy"
+        />
+        <figcaption class="moment__caption">{m.caption}</figcaption>
+      </figure>
+    ))}
+  </div>
+)}

@@ -2,9 +2,15 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Certifications from '../components/Certifications.astro';
 import Competitions from '../components/Competitions.astro';
+import Moments from '../components/Moments.astro';
 import { externalWriting } from '../data/external-writing';
 
 const recentWriting = externalWriting.slice(0, 4);
+
+// Only render the "In the room" band when at least one photo exists.
+const hasMoments = Object.keys(
+  import.meta.glob('/src/assets/moments/*.{jpg,jpeg,png,webp}')
+).length > 0;
 
 const ituArticle = 'https://www.itu.int/hub/2026/06/ai-for-good-meet-the-people-powering-machine-learning-solutions/';
 
@@ -144,25 +150,35 @@ const timeline = [
     </div>
   </section>
 
-  <section class="band">
+  {hasMoments && (
+    <section class="band">
+      <div class="container">
+        <p class="section__label"><span class="section__num">04</span> Beyond the desk</p>
+        <h2 class="section__title">In the room.</h2>
+        <Moments />
+      </div>
+    </section>
+  )}
+
+  <section class={hasMoments ? 'band band--alt' : 'band'}>
     <div class="container">
-      <p class="section__label"><span class="section__num">04</span> Competitions</p>
+      <p class="section__label"><span class="section__num">{hasMoments ? '05' : '04'}</span> Competitions</p>
       <h2 class="section__title">Measured against the field.</h2>
       <Competitions />
     </div>
   </section>
 
-  <section class="band band--alt">
+  <section class={hasMoments ? 'band' : 'band band--alt'}>
     <div class="container">
-      <p class="section__label"><span class="section__num">05</span> Certifications</p>
+      <p class="section__label"><span class="section__num">{hasMoments ? '06' : '05'}</span> Certifications</p>
       <h2 class="section__title">Verified, not just claimed.</h2>
       <Certifications />
     </div>
   </section>
 
-  <section class="band">
+  <section class={hasMoments ? 'band band--alt' : 'band'}>
     <div class="container">
-      <p class="section__label"><span class="section__num">06</span> Community & leadership</p>
+      <p class="section__label"><span class="section__num">{hasMoments ? '07' : '06'}</span> Community & leadership</p>
       <h2 class="section__title">Building the ecosystem.</h2>
       <ul class="lead-list">
         <li data-reveal><strong>Zindi Ambassador for Zimbabwe</strong> (2025 to present): organising events, running competitions, and mentoring practitioners.</li>
@@ -174,9 +190,9 @@ const timeline = [
     </div>
   </section>
 
-  <section class="band band--alt">
+  <section class={hasMoments ? 'band' : 'band band--alt'}>
     <div class="container">
-      <p class="section__label"><span class="section__num">07</span> Published writing</p>
+      <p class="section__label"><span class="section__num">{hasMoments ? '08' : '07'}</span> Published writing</p>
       <h2 class="section__title">Writing for Africa.</h2>
       <div class="case-study__content">
         <p>I write about technology, leadership, and Africa for Right for Education, reaching audiences across the continent. A few recent pieces:</p>
