@@ -1,0 +1,50 @@
+---
+title: "ZimCropGuard: multi-crop disease detection under domain shift"
+description: "Ongoing research: a hybrid deep-learning framework for multi-crop disease detection across real African field conditions. Best Poster, IndabaX Zimbabwe 2026."
+sector: "Agriculture / Computer Vision Research"
+tech: ["PyTorch", "EfficientNetB0", "ViT-B/16", "Streamlit", "PWA"]
+order: 1
+---
+
+**Status: research in progress.** The results below are preliminary. This page describes an active programme, not a finished product, and any numbers should be read as work in progress rather than final claims.
+
+## The idea
+
+ZimCropGuard is a hybrid deep-learning framework for detecting crop disease across multiple Zimbabwean staple crops, from a single phone photo, under the messy conditions farmers actually shoot in. It builds on my completed BSc dissertation, a [hybrid CNN-Transformer for tomato leaf disease](/work/applied-ml-research) that is already deployed, and scales the same robustness-first philosophy to a much larger, multi-crop problem.
+
+**Scale.** 5 Zimbabwean staple crops, 21+ disease classes, and 54,000+ training images.
+
+## The central hypothesis
+
+Models trained on clean laboratory imagery, such as PlantVillage, systematically underperform on real African field conditions. The distribution shifts across lighting, camera quality, background clutter, cultivar, and leaf position, and a model that has only ever seen lab data does not survive the move outdoors. The hypothesis under test is that domain-adaptive training measurably closes that gap. Quantifying the shift, and the recovery, is the point of the research.
+
+## Architecture
+
+Two complementary backbones read each image in parallel:
+
+- **EfficientNetB0** captures fine local texture, the lesion-level detail that distinguishes one disease from another.
+- **ViT-B/16** captures global structure, the arrangement and context across the whole leaf.
+
+Their features are concatenated and fused through learned dense layers, a learned-fusion ensemble rather than a simple average of two predictions, so the model can weigh local and global evidence per case.
+
+## Training strategy
+
+A staged pipeline, designed for a large and imbalanced multi-crop dataset:
+
+1. **Freeze and pretrain** the backbones on the combined dataset.
+2. **Head training** on the fused classifier while the backbones stay frozen.
+3. **Full fine-tune** end to end at a low learning rate.
+4. **Domain calibration** on a mixed set of laboratory and real field images, with focal loss to handle heavy class imbalance across 21+ diseases.
+
+## Recognition
+
+- **Best Poster, IndabaX Zimbabwe 2026.**
+- Selected to **represent Zimbabwe at the Deep Learning Indaba 2027.**
+
+## Deployment vision
+
+The intended delivery is a Streamlit web app plus an offline-capable progressive web app (PWA), so the tool works with intermittent connectivity in the field. Multi-language support is planned for English, Shona, and Ndebele, alongside a self-improving loop that learns from farmer-submitted uploads over time.
+
+## Where it stands
+
+The dissertation-stage tomato model proved the robustness approach end to end and is live. ZimCropGuard extends it to five crops with a larger dual-backbone architecture and an explicit domain-shift study. That study is ongoing, and the preliminary results are promising enough to have earned the poster award, with the full evaluation still in progress.

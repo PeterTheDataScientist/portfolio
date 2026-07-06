@@ -47,7 +47,7 @@ const metrics = [
       </div>
       <div class="now-bar">
         <span class="now-bar__tag"><span class="now-bar__dot"></span>Now</span>
-        <span>Data Scientist at AI Creative Solutions, building ML systems, analytics pipelines, and governed AI agents.</span>
+        <span>Data Scientist at AI Creative Solutions, building ML systems, analytics pipelines, and governed AI agents. Open to remote collaboration, research, and speaking.</span>
       </div>
     </div>
   </section>
@@ -72,16 +72,35 @@ const metrics = [
       <h2 class="section__title">Data science, put into production.</h2>
       <div class="work-grid">
 
+        <a href="/work/zimcropguard" class="work-card" data-reveal>
+          <span class="work-card__sector">Computer vision research</span>
+          <h3 class="work-card__title">ZimCropGuard: multi-crop disease detection</h3>
+          <p class="work-card__desc">
+            Ongoing research scaling my dissertation to 5 crops and 21+ diseases across real African field conditions, with an explicit domain-shift study.
+          </p>
+          <div class="work-card__stats">
+            <span class="work-card__stat"><strong>Best Poster</strong> IndabaX 2026</span>
+            <span class="work-card__stat"><strong>5 crops</strong> 21+ classes</span>
+            <span class="work-card__stat"><strong>54K+</strong> training images</span>
+          </div>
+          <div class="tech-tags">
+            <span class="tech-tag">PyTorch</span>
+            <span class="tech-tag">EfficientNetB0</span>
+            <span class="tech-tag">ViT-B/16</span>
+            <span class="tech-tag">Streamlit</span>
+          </div>
+        </a>
+
         <a href="/work/applied-ml-research" class="work-card" data-reveal>
           <span class="work-card__sector">Machine learning research</span>
-          <h3 class="work-card__title">Hybrid CNN-Transformer for crop disease detection</h3>
+          <h3 class="work-card__title">Hybrid CNN-Transformer for tomato leaf disease</h3>
           <p class="work-card__desc">
-            BSc research: a robustness-engineered model that closes the lab-to-field accuracy gap for smallholder farmers using budget phones.
+            My completed BSc dissertation, deployed as a live Streamlit app: a robustness-engineered model that closes the lab-to-field gap on budget phones. The proof of concept beneath ZimCropGuard.
           </p>
           <div class="work-card__stats">
             <span class="work-card__stat"><strong>+36pt</strong> low-light F1 gain</span>
-            <span class="work-card__stat"><strong>14.88M</strong> parameters</span>
-            <span class="work-card__stat"><strong>Best Poster</strong> IndabaX 2026</span>
+            <span class="work-card__stat"><strong>Live</strong> Streamlit demo</span>
+            <span class="work-card__stat"><strong>Deployed</strong> BSc dissertation</span>
           </div>
           <div class="tech-tags">
             <span class="tech-tag">PyTorch</span>
@@ -95,7 +114,7 @@ const metrics = [
           <span class="work-card__sector">AI engineering</span>
           <h3 class="work-card__title">AI agent orchestration</h3>
           <p class="work-card__desc">
-            AI agents that query live enterprise databases in real time, with governance layers that make a fabricated answer architecturally impossible.
+            AI agents that query live enterprise databases in real time. The model never does the arithmetic; every figure is computed by deterministic code from query results, so fabricated numbers cannot occur.
           </p>
           <div class="tech-tags">
             <span class="tech-tag">MindStudio</span>
@@ -109,11 +128,11 @@ const metrics = [
           <span class="work-card__sector">Enterprise integration</span>
           <h3 class="work-card__title">Live ERP integration & analytics</h3>
           <p class="work-card__desc">
-            Connecting to production SAP Business One and Openbravo environments, reverse-engineering undocumented schemas into trustworthy analytics.
+            Connecting to production SAP Business One and PostgreSQL-based ERP environments, reverse-engineering undocumented schemas into trustworthy analytics.
           </p>
           <div class="tech-tags">
             <span class="tech-tag">SAP Business One</span>
-            <span class="tech-tag">Openbravo</span>
+            <span class="tech-tag">PostgreSQL-based ERP</span>
             <span class="tech-tag">PostgreSQL</span>
             <span class="tech-tag">T-SQL</span>
           </div>

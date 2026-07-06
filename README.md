@@ -4,12 +4,12 @@
 
 I turn undocumented enterprise data into models, analytics, and governed AI systems that organisations trust enough to act on.
 
-Currently a Data Scientist at [AI Creative Solutions](https://aicreative.solutions), building machine learning pipelines, analytics, and AI agents on production enterprise data (SAP Business One, Openbravo, PostgreSQL).
+Currently a Data Scientist at [AI Creative Solutions](https://aicreative.solutions), building machine learning pipelines, analytics, and AI agents on production enterprise data (SAP Business One and PostgreSQL-based ERP systems).
 
 ## What I do
 
 - **Machine learning**: Hybrid CNN-Transformer architectures, robustness engineering, computer vision for African agriculture
-- **Enterprise AI**: Governed AI agents that query live databases with safety layers making fabricated answers architecturally impossible
+- **Enterprise AI**: Governed AI agents that query live databases; the model never does the arithmetic, so every figure is computed by deterministic code from query results and fabricated numbers cannot occur
 - **Data engineering**: Schema discovery on undocumented ERPs, analytics pipelines, multi-currency reconciliation
 - **Full-stack platforms**: React, Express, PostgreSQL, Drizzle ORM production systems with RBAC and audit trails
 
@@ -23,7 +23,7 @@ Currently a Data Scientist at [AI Creative Solutions](https://aicreative.solutio
 
 ## Links
 
-- Portfolio: [petermundowa.vercel.app](https://petermundowa.vercel.app)
+- Portfolio: [petermundowa.com](https://petermundowa.com)
 - LinkedIn: [petertinashemundowa](https://www.linkedin.com/in/petertinashemundowa)
 - Zindi: [PeterTheAnalyst](https://zindi.africa/users/PeterTheAnalyst)
 - Kaggle: [petermundowa](https://www.kaggle.com/petermundowa)

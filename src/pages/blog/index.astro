@@ -13,52 +13,63 @@ type Entry = {
   source: string | null;
 };
 
-const local: Entry[] = posts.map((post) => ({
-  title: post.data.title,
-  date: post.data.date,
-  href: `/blog/${post.id}`,
-  external: false,
-  source: null,
-}));
+const local: Entry[] = posts
+  .map((post) => ({
+    title: post.data.title,
+    date: post.data.date,
+    href: `/blog/${post.id}`,
+    external: false,
+    source: null,
+  }))
+  .sort((a, b) => b.date.valueOf() - a.date.valueOf());
 
-const external: Entry[] = externalWriting.map((article) => ({
-  title: article.title,
-  date: new Date(article.date),
-  href: article.url,
-  external: true,
-  source: article.source,
-}));
+const civic: Entry[] = externalWriting
+  .map((article) => ({
+    title: article.title,
+    date: new Date(article.date),
+    href: article.url,
+    external: true,
+    source: article.source,
+  }))
+  .sort((a, b) => b.date.valueOf() - a.date.valueOf());
 
-const entries = [...local, ...external].sort(
-  (a, b) => b.date.valueOf() - a.date.valueOf()
-);
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' });
 ---
 
-<BaseLayout title="Writing" description="Articles on enterprise AI, data engineering, leadership, and building in Africa, by Peter Tinashe Mundowa.">
+<BaseLayout title="Writing" description="Technical essays on enterprise AI and data engineering by Peter Tinashe Mundowa, alongside civic writing for Right for Education.">
   <section class="band band--hero">
     <div class="container">
       <p class="hero__eyebrow">Writing</p>
       <h1 class="hero__title">Thinking out <em>loud.</em></h1>
-      <p class="hero__subtitle">Notes on enterprise AI and data engineering, alongside published articles on technology, leadership, and Africa for Right for Education.</p>
+      <p class="hero__subtitle">Technical notes on enterprise AI and data engineering, plus civic essays on technology, leadership, and Africa written for Right for Education.</p>
     </div>
   </section>
+
   <section class="band">
     <div class="container">
+      <p class="section__label">Technical writing</p>
+      <h2 class="section__title">On enterprise AI and data.</h2>
       <div class="blog-list">
-        {entries.map((entry) => (
-          <a
-            href={entry.href}
-            class="blog-item"
-            target={entry.external ? '_blank' : undefined}
-            rel={entry.external ? 'noopener' : undefined}
-          >
-            <span class="blog-item__titlewrap">
-              <span class="blog-item__title">{entry.title}</span>
-              {entry.external && entry.source && (
-                <span class="blog-badge">{entry.source}</span>
-              )}
-            </span>
-            <span class="blog-item__date">{entry.date.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })}</span>
+        {local.map((entry) => (
+          <a href={entry.href} class="blog-item">
+            <span class="blog-item__title">{entry.title}</span>
+            <span class="blog-item__date">{fmt(entry.date)}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--alt">
+    <div class="container">
+      <p class="section__label">Civic writing</p>
+      <h2 class="section__title">For Right for Education.</h2>
+      <p class="hero__subtitle" style="margin-bottom: 1.5rem;">Essays on technology, leadership, and Africa, written for Right for Education's continent-wide audience.</p>
+      <div class="blog-list">
+        {civic.map((entry) => (
+          <a href={entry.href} class="blog-item" target="_blank" rel="noopener">
+            <span class="blog-item__title">{entry.title}</span>
+            <span class="blog-item__date">{fmt(entry.date)}</span>
           </a>
         ))}
       </div>

@@ -1,10 +1,10 @@
 // Externally published articles (Right for Education).
-// These are listed alongside local blog posts in the Writing section and
-// open in a new tab.
+// These are listed on the Writing page under "Civic writing" and open in a
+// new tab.
 //
-// NOTE: each `url` currently points at the Right for Education author archive,
-// because the per-article URLs were not supplied. To deep-link a piece, replace
-// its `url` with the exact article address from rightforeducation.org.
+// Deep-linked pieces carry their exact rightforeducation.org article URL and
+// publication date. Any piece whose per-article URL is not yet confirmed falls
+// back to the author archive below.
 
 export interface ExternalArticle {
   title: string;
@@ -25,32 +25,32 @@ export const externalWriting: ExternalArticle[] = [
   },
   {
     title: 'Beyond the Robots: What Artificial Intelligence Really Means',
-    date: '2026-03-01',
-    url: RED_AUTHOR_PAGE,
+    date: '2026-03-05',
+    url: 'https://rightforeducation.org/2026/03/05/understanding-what-artificial-intelligence-really-means/',
     source: 'R:Ed',
   },
   {
     title: 'Africa: The Continent of Untapped Wealth Below and Unseen Potential Above',
-    date: '2026-02-01',
-    url: RED_AUTHOR_PAGE,
+    date: '2026-02-16',
+    url: 'https://rightforeducation.org/2026/02/16/africa-the-continent-of-untapped-wealth/',
     source: 'R:Ed',
   },
   {
     title: 'Why Learning Data Skills Is the New Literacy',
-    date: '2026-01-01',
-    url: RED_AUTHOR_PAGE,
+    date: '2026-01-28',
+    url: 'https://rightforeducation.org/2026/01/28/why-learning-data-skills-is-the-new-literacy/',
     source: 'R:Ed',
   },
   {
     title: "Zimbabwe: From Africa's Breadbasket to Revival and Growth",
-    date: '2026-01-01',
-    url: RED_AUTHOR_PAGE,
+    date: '2026-01-12',
+    url: 'https://rightforeducation.org/2026/01/12/zimbabwe-from-africas-breadbasket-to-revival-and-growth/',
     source: 'R:Ed',
   },
   {
     title: 'Leadership in the Age of Technology: Guiding Change with Wisdom',
-    date: '2025-12-01',
-    url: RED_AUTHOR_PAGE,
+    date: '2025-12-08',
+    url: 'https://rightforeducation.org/2025/12/08/leadership-in-the-age-of-technology-guiding-change-with-wisdom/',
     source: 'R:Ed',
   },
   {
@@ -67,8 +67,8 @@ export const externalWriting: ExternalArticle[] = [
   },
   {
     title: 'Empowering Africa: Unleashing the Potential of Youth Entrepreneurship',
-    date: '2024-07-01',
-    url: RED_AUTHOR_PAGE,
+    date: '2024-07-24',
+    url: 'https://rightforeducation.org/2024/07/24/potential-youth-entrepreneurship/',
     source: 'R:Ed',
   },
 ];
