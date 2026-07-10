@@ -288,6 +288,51 @@ a:hover { color: var(--color-accent-hover); }
   color: #fff;
 }
 
+.work-card__tagrow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.work-card__tagrow .work-card__sector {
+  margin-bottom: 0;
+}
+.work-card__layer {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-tertiary);
+  border: 1px solid var(--color-border-strong);
+  padding: 2px 9px;
+  border-radius: 4px;
+}
+
+/* Work page stack strip */
+.stack-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+.stack-card {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1.1rem 1.25rem;
+}
+.stack-card__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.6rem;
+}
+.stack-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
 .work-card__title {
   font-family: var(--font-display);
   font-size: 1.25rem;
@@ -763,6 +808,25 @@ a:hover { color: var(--color-accent-hover); }
   margin-top: 0.35rem;
 }
 
+/* "How I work" principle cards (reuse .hero-stat chrome) */
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.principle__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  color: var(--color-text);
+  margin-bottom: 0.35rem;
+}
+.principle__body {
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
 /* Certifications grid (3 columns on desktop) */
 .cert-grid {
   display: grid;
@@ -1140,6 +1204,8 @@ a:hover { color: var(--color-accent-hover); }
   .comp-item { flex-direction: column; gap: 0.2rem; }
   .comp-item__rank { min-width: 0; }
   .work-grid { grid-template-columns: 1fr; }
+  .stack-strip { grid-template-columns: 1fr; }
+  .principles-grid { grid-template-columns: 1fr; }
   .moments-grid { grid-template-columns: 1fr; }
   .metric-grid { grid-template-columns: repeat(2, 1fr); }
   .timeline__item { grid-template-columns: 3.25rem 1fr; gap: 0.875rem; }

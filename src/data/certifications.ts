@@ -16,8 +16,22 @@ export const certifications: CertGroup[] = [
     ],
   },
   {
+    // Skilljar-issued credentials; verify links follow https://verify.skilljar.com/c/{credentialId}
+    provider: 'Anthropic',
+    items: [
+      { name: 'Building with the Claude API', date: '2026', url: 'https://verify.skilljar.com/c/xp7ctui47jxa' },
+      { name: 'Claude Code in Action', date: '2026', url: 'https://verify.skilljar.com/c/454ccndwthwy' },
+      { name: 'Introduction to Model Context Protocol', date: '2026', url: 'https://verify.skilljar.com/c/8u294pm7r5wx' },
+      { name: 'Introduction to Subagents', date: '2026', url: 'https://verify.skilljar.com/c/vx8wzd6va8kn' },
+      { name: 'Claude in Amazon Bedrock', date: '2026', url: 'https://verify.skilljar.com/c/bv6gcxe4cmxc' },
+      { name: 'Claude with Google Cloud Vertex AI', date: '2026', url: 'https://verify.skilljar.com/c/5hxcstkixh3i' },
+      { name: 'Teaching the AI Fluency Framework', date: '2026', url: 'https://verify.skilljar.com/c/cb77ivptyhcm' },
+    ],
+  },
+  {
     provider: 'DataCamp',
     items: [
+      { name: 'AI Engineer for Data Scientists Associate', date: '2025', url: 'https://www.datacamp.com/certificate/AEDS0015834661742' },
       { name: 'Data Engineer Associate', date: 'Oct 2024', url: 'https://www.datacamp.com/certificate/DEA0018707332646' },
       { name: 'Data Analyst Associate', date: 'Oct 2024', url: 'https://www.datacamp.com/certificate/DAA0016857435069' },
       { name: 'SQL Associate', date: 'Oct 2024', url: 'https://www.datacamp.com/certificate/SQA0016556196174' },

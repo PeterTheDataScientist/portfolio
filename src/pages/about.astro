@@ -32,6 +32,13 @@ const timeline = [
   { year: '2024-25', title: 'Revenue Assurance Intern, Steward Bank', detail: 'Revenue-assurance dashboards and automated data extraction across billing systems.' },
   { year: '2022', title: 'Started BSc Data Science', detail: 'University of Zimbabwe.' },
 ];
+
+const principles = [
+  { title: 'Evidence over claims.', body: 'If a number cannot be verified, it does not go on the page.' },
+  { title: 'The model never touches the numbers.', body: 'Deterministic code calculates. The model narrates.' },
+  { title: 'Build for the terrain.', body: 'Budget phones, intermittent power, multi-currency ledgers. A system that only works in ideal conditions is a lab result.' },
+  { title: 'Honest status beats fake completeness.', body: 'Unknown renders as unknown, never as a fabricated zero.' },
+];
 ---
 
 <BaseLayout
@@ -79,6 +86,8 @@ const timeline = [
         <p>I started out at a bank, building revenue-assurance dashboards and automating data pipelines across billing systems. That year taught me something I have never let go of: getting a model to work is the easy part, and the real distance is between a model that works in a notebook and a system that delivers a correct answer, every day, to someone who is about to make a decision with it.</p>
 
         <p>Today I am a Data Scientist at AI Creative Solutions, where I take the messy, undocumented data organisations actually run on and turn it into models, analytics, and decision systems they can trust. In practice that means feature engineering on data that fights back, analytics pipelines reconciled against a human source of truth, and governed AI agents that are kept nowhere near a number they could invent. I build the production platforms around that work too, because a model only matters once it reaches the people making decisions.</p>
+
+        <p>Titles blur at this layer of the work. In any given week I am doing data engineering, machine learning, business intelligence, and software engineering. I call it data science because every layer exists for one outcome: a correct number in front of a person about to make a decision. The pipelines feed the models, the platforms and agents deliver them, and the BI makes them legible. I build the whole path because a model that never ships is a lab result.</p>
 
         <p>I have a strong opinion about applied AI: the model is the easy part. You can swap it on a Tuesday and nobody notices. The value lives in everything around it, the data wrangling, the feature work, the evidence governance, and the analytics that make a result trustworthy enough to act on. That is the part I build, and it is the part most demos quietly skip.</p>
 
@@ -133,7 +142,22 @@ const timeline = [
 
   <section class="band band--alt">
     <div class="container">
-      <p class="section__label"><span class="section__num">03</span> Recognition & features</p>
+      <p class="section__label"><span class="section__num">03</span> Approach</p>
+      <h2 class="section__title">How I work.</h2>
+      <div class="principles-grid">
+        {principles.map((p) => (
+          <div class="hero-stat principle" data-reveal>
+            <p class="principle__title">{p.title}</p>
+            <p class="principle__body">{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <p class="section__label"><span class="section__num">04</span> Recognition & features</p>
       <h2 class="section__title">Work that travelled.</h2>
       <div class="case-study__content">
         <ul>
@@ -151,34 +175,34 @@ const timeline = [
   </section>
 
   {hasMoments && (
-    <section class="band">
+    <section class="band band--alt">
       <div class="container">
-        <p class="section__label"><span class="section__num">04</span> Beyond the desk</p>
+        <p class="section__label"><span class="section__num">05</span> Beyond the desk</p>
         <h2 class="section__title">In the room.</h2>
         <Moments />
       </div>
     </section>
   )}
 
-  <section class={hasMoments ? 'band band--alt' : 'band'}>
+  <section class={hasMoments ? 'band' : 'band band--alt'}>
     <div class="container">
-      <p class="section__label"><span class="section__num">{hasMoments ? '05' : '04'}</span> Competitions</p>
+      <p class="section__label"><span class="section__num">{hasMoments ? '06' : '05'}</span> Competitions</p>
       <h2 class="section__title">Measured against the field.</h2>
       <Competitions />
     </div>
   </section>
 
-  <section class={hasMoments ? 'band' : 'band band--alt'}>
+  <section class={hasMoments ? 'band band--alt' : 'band'}>
     <div class="container">
-      <p class="section__label"><span class="section__num">{hasMoments ? '06' : '05'}</span> Certifications</p>
+      <p class="section__label"><span class="section__num">{hasMoments ? '07' : '06'}</span> Certifications</p>
       <h2 class="section__title">Verified, not just claimed.</h2>
       <Certifications />
     </div>
   </section>
 
-  <section class={hasMoments ? 'band band--alt' : 'band'}>
+  <section class={hasMoments ? 'band' : 'band band--alt'}>
     <div class="container">
-      <p class="section__label"><span class="section__num">{hasMoments ? '07' : '06'}</span> Community & leadership</p>
+      <p class="section__label"><span class="section__num">{hasMoments ? '08' : '07'}</span> Community & leadership</p>
       <h2 class="section__title">Building the ecosystem.</h2>
       <ul class="lead-list">
         <li data-reveal><strong>Zindi Ambassador for Zimbabwe</strong> (2025 to present): organising events, running competitions, and mentoring practitioners.</li>
@@ -190,9 +214,9 @@ const timeline = [
     </div>
   </section>
 
-  <section class={hasMoments ? 'band' : 'band band--alt'}>
+  <section class={hasMoments ? 'band band--alt' : 'band'}>
     <div class="container">
-      <p class="section__label"><span class="section__num">{hasMoments ? '08' : '07'}</span> Published writing</p>
+      <p class="section__label"><span class="section__num">{hasMoments ? '09' : '08'}</span> Published writing</p>
       <h2 class="section__title">Writing for Africa.</h2>
       <div class="case-study__content">
         <p>I write about technology, leadership, and Africa for Right for Education, reaching audiences across the continent. A few recent pieces:</p>

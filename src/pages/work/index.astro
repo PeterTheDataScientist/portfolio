@@ -4,6 +4,21 @@ import { getCollection } from 'astro:content';
 const work = (await getCollection('work')).sort(
   (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
 );
+
+// Which layer of the stack each project enters at.
+const layerOf: Record<string, string> = {
+  'zimcropguard': 'Models',
+  'applied-ml-research': 'Models',
+  'ai-agent-orchestration': 'Delivery',
+  'live-erp-integration': 'Data',
+  'legacy-system-modernisation': 'Delivery',
+};
+
+const layers = [
+  { name: 'Data', items: ['Schema discovery', 'ERP integration', 'Pipelines'] },
+  { name: 'Models', items: ['ML', 'Analytics', 'Evaluation'] },
+  { name: 'Delivery', items: ['Agents', 'BI', 'Production platforms'] },
+];
 ---
 
 <BaseLayout title="Work" description="Capability areas spanning enterprise AI, production platforms, live ERP integration, and applied machine learning.">
@@ -11,7 +26,17 @@ const work = (await getCollection('work')).sort(
     <div class="container">
       <p class="hero__eyebrow">Work</p>
       <h1 class="hero__title">Built for <em>real problems.</em></h1>
-      <p class="hero__subtitle">Capability areas across applied machine learning, AI engineering, analytics, and the production platforms that put data science to work, all on real data for real businesses.</p>
+      <p class="hero__subtitle">Everything here sits on one stack. The data layer: pipelines, ERP integration, and schema discovery on undocumented systems. The model layer: machine learning, analytics, and evaluation. The delivery layer: AI agents, business intelligence, and production platforms that put the numbers in front of the people deciding. Different projects enter at different layers. The goal never changes.</p>
+      <div class="stack-strip">
+        {layers.map((layer) => (
+          <div class="stack-card">
+            <p class="stack-card__title">{layer.name}</p>
+            <div class="stack-card__tags">
+              {layer.items.map((item) => <span class="tech-tag">{item}</span>)}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
   <section class="band band--tight">
@@ -19,7 +44,10 @@ const work = (await getCollection('work')).sort(
       <div class="work-grid">
         {work.map((project) => (
           <a href={`/work/${project.id}`} class="work-card" data-reveal>
-            <span class="work-card__sector">{project.data.sector}</span>
+            <span class="work-card__tagrow">
+              <span class="work-card__sector">{project.data.sector}</span>
+              {layerOf[project.id] && <span class="work-card__layer">{layerOf[project.id]}</span>}
+            </span>
             <h3 class="work-card__title">{project.data.title}</h3>
             <p class="work-card__desc">{project.data.description}</p>
             <div class="tech-tags">
