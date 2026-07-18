@@ -50,7 +50,7 @@ const isActive = (base: string) => pathname === base || pathname.startsWith(base
     "@type": "Person",
     "name": "Peter Tinashe Mundowa",
     "url": Astro.site?.toString(),
-    "jobTitle": "Data Scientist & AI Engineer",
+    "jobTitle": ["Data Scientist", "AI Engineer", "Machine Learning Engineer"],
     "worksFor": {
       "@type": "Organization",
       "name": "AI Creative Solutions"
@@ -59,7 +59,12 @@ const isActive = (base: string) => pathname === base || pathname.startsWith(base
       "@type": "CollegeOrUniversity",
       "name": "University of Zimbabwe"
     },
-    "knowsAbout": ["AI Engineering", "Data Science", "Enterprise AI", "Machine Learning", "SAP Business One", "PostgreSQL"],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Harare",
+      "addressCountry": "ZW"
+    },
+    "knowsAbout": ["AI Engineering", "Data Science", "Enterprise AI", "Machine Learning", "SAP Business One", "PostgreSQL", "Data Engineering", "Business Intelligence", "Computer Vision", "AI Agents"],
     "sameAs": [
       "https://www.linkedin.com/in/petertinashemundowa",
       "https://github.com/PeterTheDataScientist",

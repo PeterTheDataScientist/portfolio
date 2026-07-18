@@ -1,0 +1,19 @@
+---
+title: "Measures and calculated columns are not the same thing"
+description: "The most common Power BI mistake I see, why it produces confidently wrong numbers, and the one question that tells you which to use."
+date: 2026-07-18
+---
+
+Power BI gives you two ways to add logic to a model, and mixing them up is the most common way I see dashboards produce confident, wrong numbers.
+
+A calculated column runs once, at refresh, row by row. The result is stored in the model like any other column. It knows everything about its own row and nothing about what the user later puts on a visual.
+
+A measure runs at query time, inside whatever filter context the visual creates. It is not stored anywhere. Change the slicer, the measure recalculates. It knows everything about the current selection and nothing about individual rows unless you ask.
+
+The question that decides between them: does the answer change depending on what is selected on the page? If yes, it is a measure. If it is a permanent fact about one row, it is a column.
+
+Here is where it goes wrong in practice. Someone creates a calculated column called Margin Percent, dividing profit by revenue on each row. Then they drag it into a card and Power BI offers to average it. The average of row level percentages is not the margin of the business. A branch with ten dollars of revenue at 90 percent margin now weighs the same as a branch with a million at 12. The correct version is a measure: divide the sum of profit by the sum of revenue, so the arithmetic happens after the filters, at the right level.
+
+The costs differ too. Columns are paid for in memory, every row, whether anyone looks or not. Measures are paid for in CPU at query time. On small models nobody notices. On large ones, a habit of calculated columns is why the file is slow and enormous.
+
+My rule, after certifying in this tool and living with it in production: ratios, totals, and anything a slicer should change are measures, always. Columns are for labels, categories, and keys. When in doubt, write the measure. It is almost always what the business question was actually asking.

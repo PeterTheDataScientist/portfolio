@@ -1,0 +1,25 @@
+---
+title: "Profile the data before you trust it"
+description: "Five minutes of profiling saves five weeks of explaining. The checks I run on every new table before a single chart gets built."
+date: 2026-07-18
+---
+
+Every dataset arrives with a story attached. The person handing it over tells you what it contains, how complete it is, and what the columns mean. The story is usually wrong in at least one place. Profiling is how you find that place before it finds you.
+
+I learned this on a column that looked numeric for the first forty thousand rows. Then someone had typed "see notes" into row forty thousand and one, and every aggregate downstream had quietly been treating the column as text. Nobody noticed for months because nobody looked.
+
+So before I build anything on a new table, I run the same checks, in the same order.
+
+Count the rows and compare against expectation. If the business says there are about 12,000 customers and the table has 90,000 rows, the conversation starts there, not in a dashboard.
+
+Select the distinct values of every categorical column, with counts. This is where you meet the four spellings of the same branch name, the status codes nobody documented, and the category called TEST that someone forgot to delete.
+
+Check the minimum and maximum of every date and number. Dates in the future, negative quantities, an order from 1899. Each one is a question for a human, not a row to silently drop.
+
+Test the unique key you were promised. Group by it and count. If any group returns more than one row, the key is not a key, and every join you were about to write would have multiplied rows without telling you.
+
+Count the nulls per column, then ask what null means in each one. Never assume it means the same thing twice.
+
+None of this needs tooling. It is six queries and fifteen minutes, and it changes your position entirely. You stop being the person who built a wrong chart, and you become the person who found the problem before it shipped.
+
+The data does not care about the story it arrived with. Look first. Trust after.
